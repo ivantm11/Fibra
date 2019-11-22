@@ -164,7 +164,10 @@ public class producto extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(Rx, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(36, Short.MAX_VALUE))
-            .addComponent(jScrollPane2)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane2)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -181,302 +184,257 @@ public class producto extends javax.swing.JFrame {
                     .addComponent(Rx, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(35, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnFibraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFibraActionPerformed
-        
         try {
-        DefaultTableModel modelo = new DefaultTableModel();
-        jTfibra.setModel(modelo);
-        
-        PreparedStatement ps = null;
-        ResultSet rs = null;
-        Conexion conn = new Conexion();
-        Connection con = conn.getConexion();
-        
-        String sql = ("SELECT fabricante, tipo, WL, atenuacion, BW, LC, Costo, uso FROM producto");
-        ps = con.prepareStatement(sql);
-        rs = ps.executeQuery();
-        
-        ResultSetMetaData rsMd = rs.getMetaData();
-        int  cantidadColumnas = rsMd.getColumnCount();
-        
-        modelo.addColumn("Fabricante");
-        modelo.addColumn("Tipo");
-        modelo.addColumn("Longitud de Onda");
-        modelo.addColumn("Atenuación");
-        modelo.addColumn("Ancho de Banda");
-        modelo.addColumn("Longitud de Carrete");
-        modelo.addColumn("Costo $");
-        modelo.addColumn("Aplicación");
-        
-        while(rs.next()){
-        
-            Object[] filas = new Object[cantidadColumnas];
-            
-            for (int i = 0;i < cantidadColumnas; i++ )
-            {
-            
-                filas[i] = rs.getObject(i+1);
-            
+            DefaultTableModel modelo = new DefaultTableModel();
+            jTfibra.setModel(modelo);
+
+            PreparedStatement ps = null;
+            ResultSet rs = null;
+            Conexion conn = new Conexion();
+            Connection con = conn.getConexion();
+
+            String sql = ("SELECT fabricante, tipo, WL, atenuacion, BW, LC, Costo, uso FROM producto");
+            ps = con.prepareStatement(sql);
+            rs = ps.executeQuery();
+
+            ResultSetMetaData rsMd = rs.getMetaData();
+            int  cantidadColumnas = rsMd.getColumnCount();
+
+            modelo.addColumn("Fabricante");
+            modelo.addColumn("Tipo");
+            modelo.addColumn("Longitud de Onda");
+            modelo.addColumn("Atenuación");
+            modelo.addColumn("Ancho de Banda");
+            modelo.addColumn("Longitud de Carrete");
+            modelo.addColumn("Costo $");
+            modelo.addColumn("Aplicación");
+
+            while(rs.next()) {
+                Object[] filas = new Object[cantidadColumnas];
+                for (int i = 0;i < cantidadColumnas; i++ ) {
+                    filas[i] = rs.getObject(i+1);
+                }
+            modelo.addRow(filas);
             }
-        modelo.addRow(filas);
-        } 
-        
-        }catch(SQLException ex){
-        System.err.println(ex.toString());
+        } catch(SQLException ex) {
+            System.err.println(ex.toString());
         }
     }//GEN-LAST:event_btnFibraActionPerformed
 
     private void btnConectoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConectoresActionPerformed
-        
         try {
-        DefaultTableModel modelo = new DefaultTableModel();
-        jTfibra.setModel(modelo);
-        
-        PreparedStatement ps = null;
-        ResultSet rs = null;
-        Conexion conn = new Conexion();
-        Connection con = conn.getConexion();
-        
-        String sql = ("SELECT conector, precio, descripcion, tipo, PInsercion FROM conectores");
-        ps = con.prepareStatement(sql);
-        rs = ps.executeQuery();
-        
-        ResultSetMetaData rsMd = rs.getMetaData();
-        int  cantidadColumnas = rsMd.getColumnCount();
-        
-        modelo.addColumn("Conectore");
-        modelo.addColumn("Costo $");
-        modelo.addColumn("Descripcion");
-        modelo.addColumn("Tipo");
-        modelo.addColumn("Perdidas de Inserción");
-        
-        while(rs.next()){
-        
-            Object[] filas = new Object[cantidadColumnas];
-            
-            for (int i = 0;i < cantidadColumnas; i++ )
-            {
-            
-                filas[i] = rs.getObject(i+1);
-            
+            DefaultTableModel modelo = new DefaultTableModel();
+            jTfibra.setModel(modelo);
+
+            PreparedStatement ps = null;
+            ResultSet rs = null;
+            Conexion conn = new Conexion();
+            Connection con = conn.getConexion();
+
+            String sql = ("SELECT conector, precio, descripcion, tipo, PInsercion FROM conectores");
+            ps = con.prepareStatement(sql);
+            rs = ps.executeQuery();
+
+            ResultSetMetaData rsMd = rs.getMetaData();
+            int  cantidadColumnas = rsMd.getColumnCount();
+
+            modelo.addColumn("Conectore");
+            modelo.addColumn("Costo $");
+            modelo.addColumn("Descripcion");
+            modelo.addColumn("Tipo");
+            modelo.addColumn("Perdidas de Inserción");
+
+            while(rs.next()){
+                Object[] filas = new Object[cantidadColumnas];
+                for (int i = 0;i < cantidadColumnas; i++ ) {
+                    filas[i] = rs.getObject(i+1);
+                }
+                modelo.addRow(filas);
             }
-        modelo.addRow(filas);
-        } 
-        
-        }catch(SQLException ex){
-        System.err.println(ex.toString());
+        } catch(SQLException ex) {
+            System.err.println(ex.toString());
         }
     }//GEN-LAST:event_btnConectoresActionPerformed
 
     private void TxOpticActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxOpticActionPerformed
-             try {
-        DefaultTableModel modelo = new DefaultTableModel();
-        jTfibra.setModel(modelo);
-        
-        PreparedStatement ps = null;
-        ResultSet rs = null;
-        Conexion conn = new Conexion();
-        Connection con = conn.getConexion();
-        
-        String sql = ("SELECT Nombre, WL, Potencia, costo FROM txOptic");
-        ps = con.prepareStatement(sql);
-        rs = ps.executeQuery();
-        
-        ResultSetMetaData rsMd = rs.getMetaData();
-        int  cantidadColumnas = rsMd.getColumnCount();
-        
-        modelo.addColumn("Nombre");
-        modelo.addColumn("Longitud de Onda");
-        modelo.addColumn("Potencia");
-        modelo.addColumn("Costo $");
-        
-        while(rs.next()){
-        
-            Object[] filas = new Object[cantidadColumnas];
-            
-            for (int i = 0;i < cantidadColumnas; i++ )
-            {
-            
-                filas[i] = rs.getObject(i+1);
-            
+        try {
+            DefaultTableModel modelo = new DefaultTableModel();
+            jTfibra.setModel(modelo);
+
+            PreparedStatement ps = null;
+            ResultSet rs = null;
+            Conexion conn = new Conexion();
+            Connection con = conn.getConexion();
+
+            String sql = ("SELECT Nombre, WL, Potencia, costo FROM txOptic");
+            ps = con.prepareStatement(sql);
+            rs = ps.executeQuery();
+
+            ResultSetMetaData rsMd = rs.getMetaData();
+            int  cantidadColumnas = rsMd.getColumnCount();
+
+            modelo.addColumn("Nombre");
+            modelo.addColumn("Longitud de Onda");
+            modelo.addColumn("Potencia");
+            modelo.addColumn("Costo $");
+
+            while(rs.next()) {
+                Object[] filas = new Object[cantidadColumnas];
+                for (int i = 0;i < cantidadColumnas; i++ ) {
+                    filas[i] = rs.getObject(i+1);
+                }
+                modelo.addRow(filas);
             }
-        modelo.addRow(filas);
-        } 
-        
-        }catch(SQLException ex){
-        System.err.println(ex.toString());
+        } catch(SQLException ex) {
+            System.err.println(ex.toString());
         }
     }//GEN-LAST:event_TxOpticActionPerformed
 
     private void JAmpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JAmpActionPerformed
-            try {
-        DefaultTableModel modelo = new DefaultTableModel();
-        jTfibra.setModel(modelo);
-        
-        PreparedStatement ps = null;
-        ResultSet rs = null;
-        Conexion conn = new Conexion();
-        Connection con = conn.getConexion();
-        
-        String sql = ("SELECT Nombre, PinMin, PinMax, PoutMin, PoutMax, Ganancia, costo  FROM amplificadores");
-        ps = con.prepareStatement(sql);
-        rs = ps.executeQuery();
-        
-        ResultSetMetaData rsMd = rs.getMetaData();
-        int  cantidadColumnas = rsMd.getColumnCount();
-        
-        modelo.addColumn("Nombre");
-        modelo.addColumn("Potencia de Entrada Minima(dBm)");
-        modelo.addColumn("Potencia de Entrada Maxima(dBm)");
-        modelo.addColumn("Potencia de Salida Minima(dBm)");
-        modelo.addColumn("Potencia de Salida Maxima(dBm)");
-        modelo.addColumn("Ganacia(dBm)");
-        modelo.addColumn("Costo $");
-        
-        while(rs.next()){
-        
-            Object[] filas = new Object[cantidadColumnas];
-            
-            for (int i = 0;i < cantidadColumnas; i++ )
-            {
-            
-                filas[i] = rs.getObject(i+1);
-            
+        try {
+            DefaultTableModel modelo = new DefaultTableModel();
+            jTfibra.setModel(modelo);
+
+            PreparedStatement ps = null;
+            ResultSet rs = null;
+            Conexion conn = new Conexion();
+            Connection con = conn.getConexion();
+
+            String sql = ("SELECT Nombre, PinMin, PinMax, PoutMin, PoutMax, Ganancia, costo  FROM amplificadores");
+            ps = con.prepareStatement(sql);
+            rs = ps.executeQuery();
+
+            ResultSetMetaData rsMd = rs.getMetaData();
+            int  cantidadColumnas = rsMd.getColumnCount();
+
+            modelo.addColumn("Nombre");
+            modelo.addColumn("Potencia de Entrada Minima(dBm)");
+            modelo.addColumn("Potencia de Entrada Maxima(dBm)");
+            modelo.addColumn("Potencia de Salida Minima(dBm)");
+            modelo.addColumn("Potencia de Salida Maxima(dBm)");
+            modelo.addColumn("Ganacia(dBm)");
+            modelo.addColumn("Costo $");
+
+            while(rs.next()) {
+                Object[] filas = new Object[cantidadColumnas];
+                for (int i = 0;i < cantidadColumnas; i++ ) {
+                    filas[i] = rs.getObject(i+1);
+                }
+                modelo.addRow(filas);
             }
-        modelo.addRow(filas);
-        } 
-        
-        }catch(SQLException ex){
-        System.err.println(ex.toString());
+        } catch(SQLException ex) {
+            System.err.println(ex.toString());
         }
     }//GEN-LAST:event_JAmpActionPerformed
 
     private void EmpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EmpActionPerformed
-           try {
-        DefaultTableModel modelo = new DefaultTableModel();
-        jTfibra.setModel(modelo);
-        
-        PreparedStatement ps = null;
-        ResultSet rs = null;
-        Conexion conn = new Conexion();
-        Connection con = conn.getConexion();
-        
-        String sql = ("SELECT nombre, precio, perdidas  FROM empalmes");
-        ps = con.prepareStatement(sql);
-        rs = ps.executeQuery();
-        
-        ResultSetMetaData rsMd = rs.getMetaData();
-        int  cantidadColumnas = rsMd.getColumnCount();
-        
-        modelo.addColumn("Nombre");
-        modelo.addColumn("Costo $");
-        modelo.addColumn("Perdidas dB");
-        
-        while(rs.next()){
-        
-            Object[] filas = new Object[cantidadColumnas];
-            
-            for (int i = 0;i < cantidadColumnas; i++ )
-            {
-            
-                filas[i] = rs.getObject(i+1);
-            
+        try {
+            DefaultTableModel modelo = new DefaultTableModel();
+            jTfibra.setModel(modelo);
+
+            PreparedStatement ps = null;
+            ResultSet rs = null;
+            Conexion conn = new Conexion();
+            Connection con = conn.getConexion();
+
+            String sql = ("SELECT nombre, precio, perdidas  FROM empalmes");
+            ps = con.prepareStatement(sql);
+            rs = ps.executeQuery();
+
+            ResultSetMetaData rsMd = rs.getMetaData();
+            int  cantidadColumnas = rsMd.getColumnCount();
+
+            modelo.addColumn("Nombre");
+            modelo.addColumn("Costo $");
+            modelo.addColumn("Perdidas dB");
+
+            while(rs.next()) {
+                Object[] filas = new Object[cantidadColumnas];
+                for (int i = 0;i < cantidadColumnas; i++ ) {
+                    filas[i] = rs.getObject(i+1);
+
+                }
+                modelo.addRow(filas);
             }
-        modelo.addRow(filas);
-        } 
-        
-        }catch(SQLException ex){
-        System.err.println(ex.toString());
+        } catch(SQLException ex) {
+            System.err.println(ex.toString());
         }
     }//GEN-LAST:event_EmpActionPerformed
 
     private void ATNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ATNActionPerformed
         try {
-        DefaultTableModel modelo = new DefaultTableModel();
-        jTfibra.setModel(modelo);
-        
-        PreparedStatement ps = null;
-        ResultSet rs = null;
-        Conexion conn = new Conexion();
-        Connection con = conn.getConexion();
-        
-        String sql = ("SELECT nombre, precio, atenuacion  FROM atenuadores");
-        ps = con.prepareStatement(sql);
-        rs = ps.executeQuery();
-        
-        ResultSetMetaData rsMd = rs.getMetaData();
-        int  cantidadColumnas = rsMd.getColumnCount();
-        
-        modelo.addColumn("Nombre");
-        modelo.addColumn("Costo $");
-        modelo.addColumn("Atenuación dB");
-        
-        while(rs.next()){
-        
-            Object[] filas = new Object[cantidadColumnas];
-            
-            for (int i = 0;i < cantidadColumnas; i++ )
-            {
-            
-                filas[i] = rs.getObject(i+1);
-            
+            DefaultTableModel modelo = new DefaultTableModel();
+            jTfibra.setModel(modelo);
+
+            PreparedStatement ps = null;
+            ResultSet rs = null;
+            Conexion conn = new Conexion();
+            Connection con = conn.getConexion();
+
+            String sql = ("SELECT nombre, precio, atenuacion  FROM atenuadores");
+            ps = con.prepareStatement(sql);
+            rs = ps.executeQuery();
+
+            ResultSetMetaData rsMd = rs.getMetaData();
+            int  cantidadColumnas = rsMd.getColumnCount();
+
+            modelo.addColumn("Nombre");
+            modelo.addColumn("Costo $");
+            modelo.addColumn("Atenuación dB");
+
+            while(rs.next()) {
+                Object[] filas = new Object[cantidadColumnas];
+                for (int i = 0;i < cantidadColumnas; i++ ) {
+                    filas[i] = rs.getObject(i+1);
+                }
+                modelo.addRow(filas);
             }
-        modelo.addRow(filas);
-        } 
-        
-        }catch(SQLException ex){
-        System.err.println(ex.toString());
+        } catch(SQLException ex) {
+            System.err.println(ex.toString());
         }
         
     }//GEN-LAST:event_ATNActionPerformed
 
     private void RxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RxActionPerformed
-        // TODO add your handling code here:
-        
         try {
-        DefaultTableModel modelo = new DefaultTableModel();
-        jTfibra.setModel(modelo);
-        
-        PreparedStatement ps = null;
-        ResultSet rs = null;
-        Conexion conn = new Conexion();
-        Connection con = conn.getConexion();
-        
-        String sql = ("SELECT nombre, precio, PinMin, PinMax, WL  FROM Rx ");
-        ps = con.prepareStatement(sql);
-        rs = ps.executeQuery();
-        
-        ResultSetMetaData rsMd = rs.getMetaData();
-        int  cantidadColumnas = rsMd.getColumnCount();
-        
-        modelo.addColumn("Nombre");
-        modelo.addColumn("Costo $");
-        modelo.addColumn("Potencia de entrada minima dBm");
-        modelo.addColumn("Potencia de entrada maxima dBm");
-        modelo.addColumn("Longitud de Onda nm");
-        
-        
-        while(rs.next()){
-        
-            Object[] filas = new Object[cantidadColumnas];
-            
-            for (int i = 0;i < cantidadColumnas; i++ )
-            {
-            
-                filas[i] = rs.getObject(i+1);
-            
-            }
-        modelo.addRow(filas);
-        } 
-        
-        }catch(SQLException ex){
-        System.err.println(ex.toString());
+            DefaultTableModel modelo = new DefaultTableModel();
+            jTfibra.setModel(modelo);
+
+            PreparedStatement ps = null;
+            ResultSet rs = null;
+            Conexion conn = new Conexion();
+            Connection con = conn.getConexion();
+
+            String sql = ("SELECT nombre, precio, PinMin, PinMax, WL  FROM Rx ");
+            ps = con.prepareStatement(sql);
+            rs = ps.executeQuery();
+
+            ResultSetMetaData rsMd = rs.getMetaData();
+            int  cantidadColumnas = rsMd.getColumnCount();
+
+            modelo.addColumn("Nombre");
+            modelo.addColumn("Costo $");
+            modelo.addColumn("Potencia de entrada minima dBm");
+            modelo.addColumn("Potencia de entrada maxima dBm");
+            modelo.addColumn("Longitud de Onda nm");
+
+
+            while(rs.next()) {
+                Object[] filas = new Object[cantidadColumnas];
+                for (int i = 0;i < cantidadColumnas; i++ ) {
+                    filas[i] = rs.getObject(i+1);
+                }
+            modelo.addRow(filas);
+            } 
+        } catch(SQLException ex) {
+            System.err.println(ex.toString());
         }
     }//GEN-LAST:event_RxActionPerformed
 
