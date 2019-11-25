@@ -23,7 +23,9 @@ public class producto extends javax.swing.JFrame {
      */
     public producto() {
         initComponents();
-       
+        this.setLocationRelativeTo(null);
+        setResizable(false);
+        setTitle("Redes de telecomunicaciones :: Productos");
     }
 
     /**
@@ -200,7 +202,7 @@ public class producto extends javax.swing.JFrame {
             Conexion conn = new Conexion();
             Connection con = conn.getConexion();
 
-            String sql = ("SELECT fabricante, tipo, WL, atenuacion, BW, LC, Costo, uso FROM producto");
+            String sql = ("SELECT fabricante, tipo, WL, atenuacion, BW, LC, Costo, exterior, interior FROM producto");
             ps = con.prepareStatement(sql);
             rs = ps.executeQuery();
 
@@ -214,7 +216,8 @@ public class producto extends javax.swing.JFrame {
             modelo.addColumn("Ancho de Banda");
             modelo.addColumn("Longitud de Carrete");
             modelo.addColumn("Costo $");
-            modelo.addColumn("Aplicación");
+            modelo.addColumn("Exterior");
+            modelo.addColumn("Interior");
 
             while(rs.next()) {
                 Object[] filas = new Object[cantidadColumnas];
