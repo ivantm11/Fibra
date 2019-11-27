@@ -81,17 +81,17 @@ create table producto(
     exterior bool not null,
     interior bool not null
 );
-
+drop table producto;
 insert into producto values
-	('OFS','unimodo',1310,3,200,9,16,1,1),
-    ('OFS','unimodo',1310,2,200,9,16,1,1),
-    ('OFS','monomodo',1550,0,200,50,13,0,1),
-    ('OFS','unimodo',1310,2,950,9,18,1,0),
-    ('OFS','monomodo',1550,0,200,50,13,0,1),
-    ('Sumitomo Electric','monomodo',1310,0,250,11,1.25,1,0),
-    ('Sumitomo Electric','monomodo',1550,0,250,11,1.25,1,0),
-    ('Corning','unimodo',1310,2,500,40,2.7,1,1),
-    ('Corning','monomodo',1550,0,500,11,3,1,1);
+	('OFS3-200','unimodo',1310,3,200,9,16,1,1),
+    ('OFS2-200','unimodo',1310,2,200,9,16,1,1),
+    ('OFS0-200','monomodo',1550,0,200,50,13,0,1),
+    ('OFS2-950','unimodo',1310,2,950,9,18,1,0),
+    ('OFS0-200','monomodo',1550,0,200,50,13,0,1),
+    ('Sumitomo Electric 1310','monomodo',1310,0,250,11,1.25,1,0),
+    ('Sumitomo Electric 1550','monomodo',1550,0,250,11,1.25,1,0),
+    ('Corning 1310','unimodo',1310,2,500,40,2.7,1,1),
+    ('Corning 1310','monomodo',1550,0,500,11,3,1,1);
 
 create table rx(
 	Nombre varchar(50) not null,
