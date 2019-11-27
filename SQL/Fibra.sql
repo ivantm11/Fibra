@@ -83,15 +83,15 @@ create table producto(
 );
 
 insert into producto values
-	('OFS','unimodo',1300,3,200,9,16,1,1),
-    ('OFS','unimodo',1300,2,200,9,16,1,1),
-    ('OFS','monomodo',1575,0,200,50,13,0,1),
-    ('OFS','unimodo',1300,2,950,9,18,1,0),
-    ('OFS','monomodo',1575,0,200,50,13,0,1),
-    ('Sumitomo Electric','monomodo',1260,0,250,11,1.25,1,0),
-    ('Sumitomo Electric','monomodo',1450,0,250,11,1.25,1,0),
-    ('Corning','unimodo',1350,2,500,40,2.7,1,1),
-    ('Corning','monomodo',1480,0,500,11,3,1,1);
+	('OFS','unimodo',1310,3,200,9,16,1,1),
+    ('OFS','unimodo',1310,2,200,9,16,1,1),
+    ('OFS','monomodo',1555,0,200,50,13,0,1),
+    ('OFS','unimodo',1310,2,950,9,18,1,0),
+    ('OFS','monomodo',1550,0,200,50,13,0,1),
+    ('Sumitomo Electric','monomodo',1310,0,250,11,1.25,1,0),
+    ('Sumitomo Electric','monomodo',1550,0,250,11,1.25,1,0),
+    ('Corning','unimodo',1310,2,500,40,2.7,1,1),
+    ('Corning','monomodo',1550,0,500,11,3,1,1);
 
 create table rx(
 	Nombre varchar(50) not null,
@@ -102,12 +102,12 @@ create table rx(
 );
 
 insert into rx values
-	('AFBR',611.52,-22,2,685),
-    ('S10',304.79,-5,-12,650),
-    ('AFBR-1555ARZ',489.26,-20,-1,650),
-    ('AFBR-2624ARZ',445.27,-4.5,2,685),
-    ('HFBR-2406z',483.44,-21.8,-16.8,820),
-    ('AFBR-2409z',522.2,-30,0,865);
+	('AFBR',611.52,-22,2,1550),
+    ('S10',304.79,-5,-12,1550),
+    ('AFBR-1555ARZ',489.26,-20,-1,1550),
+    ('AFBR-2624ARZ',445.27,-4.5,2,1310),
+    ('HFBR-2406z',483.44,-21.8,-16.8,1310),
+    ('AFBR-2409z',522.2,-30,0,1310);
 
 create table txoptic(
 	Nombre varchar(70) not null,
@@ -121,7 +121,7 @@ insert into txoptic values
     ('MFT1550-EM-210',1550,10,20000),
     ('CATV',1310,10,20100),
     ('Modulación Directa',1530,6,30000),
-    ('Modulación Externa',1548,10,37000),
+    ('Modulación Externa',1550,10,37000),
     ('MFT1310-08AG',1310,14,18500),
     ('RAYVERT FOT1310',1310,15,12000),
     ('MFT1310-10AG',1310,10,25000),
