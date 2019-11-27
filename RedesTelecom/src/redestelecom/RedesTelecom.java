@@ -5,6 +5,8 @@
  */
 package redestelecom;
 
+import java.sql.Connection;
+
 /**
  *
  * @author ivantrejo
@@ -15,7 +17,10 @@ public class RedesTelecom {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
+        ConexionSQL BaseSQL = new ConexionSQL();
+        Connection BaseDeDatos = BaseSQL.getConexionSQL();
+        if (BaseDeDatos != null) {
+            
+        }
     }
-    
 }
