@@ -85,7 +85,7 @@ create table producto(
 insert into producto values
 	('OFS','unimodo',1310,3,200,9,16,1,1),
     ('OFS','unimodo',1310,2,200,9,16,1,1),
-    ('OFS','monomodo',1555,0,200,50,13,0,1),
+    ('OFS','monomodo',1550,0,200,50,13,0,1),
     ('OFS','unimodo',1310,2,950,9,18,1,0),
     ('OFS','monomodo',1550,0,200,50,13,0,1),
     ('Sumitomo Electric','monomodo',1310,0,250,11,1.25,1,0),
