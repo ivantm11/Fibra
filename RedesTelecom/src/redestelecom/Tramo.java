@@ -6,6 +6,12 @@
 package redestelecom;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -17,12 +23,23 @@ public class Tramo extends javax.swing.JFrame {
     /**
      * Creates new form Tramo
      */
-    public Tramo(Connection conexionActiva) {
+    public Tramo(Connection conexionActiva) throws SQLException {
         initComponents();
         BaseDeDatos = conexionActiva;
         this.setLocationRelativeTo(null);
         setResizable(false);
         setTitle(".:: Generar tramo ::.");
+        loadData();
+    }
+    
+    private void loadData() throws SQLException {
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        String sql = ("SELECT fabricante, tipo, WL, atenuacion, BW, LC, Costo, exterior, interior FROM producto");
+        ps = BaseDeDatos.prepareStatement(sql);
+        rs = ps.executeQuery();
+
+        ResultSetMetaData rsMd = rs.getMetaData();
     }
 
     /**
@@ -221,7 +238,11 @@ public class Tramo extends javax.swing.JFrame {
             public void run() {
                 ConexionSQL BaseSQL = new ConexionSQL();
                 Connection BD = BaseSQL.getConexionSQL();
-                new Tramo(BD).setVisible(true);
+                try {
+                    new Tramo(BD).setVisible(true);
+                } catch (SQLException ex) {
+                    Logger.getLogger(Tramo.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }

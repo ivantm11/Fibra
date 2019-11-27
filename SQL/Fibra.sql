@@ -78,19 +78,20 @@ create table producto(
     BW int(75) not null,
     LC int(75) not null,
     costo float not null,
-    uso varchar(100) not null
+    exterior bool not null,
+    interior bool not null
 );
 
 insert into producto values
-	('OFS','unimodo',1300,3,200,9,16,'interior/exterior'),
-    ('OFS','unimodo',1300,2,200,9,16,'interior/exterior'),
-    ('OFS','monomodo',1575,0,200,50,13,'interior'),
-    ('OFS','unimodo',1300,2,950,9,18,'exterior'),
-    ('OFS','monomodo',1575,0,200,50,13,'interior'),
-    ('Sumitomo Electric','monomodo',1260,0,250,11,1.25,'exterior'),
-    ('Sumitomo Electric','monomodo',1450,0,250,11,1.25,'exterior'),
-    ('Corning','unimodo',1350,2,500,40,2.7,'interior/Exterior'),
-    ('Corning','monomodo',1480,0,500,11,3,'interior/Exterior');
+	('OFS','unimodo',1300,3,200,9,16,1,1),
+    ('OFS','unimodo',1300,2,200,9,16,1,1),
+    ('OFS','monomodo',1575,0,200,50,13,0,1),
+    ('OFS','unimodo',1300,2,950,9,18,1,0),
+    ('OFS','monomodo',1575,0,200,50,13,0,1),
+    ('Sumitomo Electric','monomodo',1260,0,250,11,1.25,1,0),
+    ('Sumitomo Electric','monomodo',1450,0,250,11,1.25,1,0),
+    ('Corning','unimodo',1350,2,500,40,2.7,1,1),
+    ('Corning','monomodo',1480,0,500,11,3,1,1);
 
 create table rx(
 	Nombre varchar(50) not null,
@@ -127,3 +128,4 @@ insert into txoptic values
     ('MFT1310-12AG',1310,12,27300),
     ('MFT1310-14AG',1310,14,30000);
 
+select * from producto;

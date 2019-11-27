@@ -6,6 +6,9 @@
 package redestelecom;
 
 import java.sql.Connection;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -97,8 +100,13 @@ public class MenuPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonProductosActionPerformed
 
     private void jButtonProgramaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonProgramaActionPerformed
-        Tramo ventanaTramo = new Tramo(BaseDeDatos);
-        ventanaTramo.setVisible(true);
+        Tramo ventanaTramo;
+        try {
+            ventanaTramo = new Tramo(BaseDeDatos);
+            ventanaTramo.setVisible(true);
+        } catch (SQLException ex) {
+            Logger.getLogger(MenuPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jButtonProgramaActionPerformed
 
     /**
