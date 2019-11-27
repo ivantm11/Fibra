@@ -4,3 +4,5 @@
 /FibraTest/build/
 /RedesTelecom/build/
 /RedesTelecom/dist/
+
+/RedesTelecom/src/redestelecom/ConexionSQL.java

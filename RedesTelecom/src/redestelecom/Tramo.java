@@ -29,6 +29,7 @@ public class Tramo extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         setResizable(false);
         setTitle(".:: Generar tramo ::.");
+        bloquearComboBoxes();
         loadData();
     }
     
@@ -52,65 +53,70 @@ public class Tramo extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jComboBox2 = new javax.swing.JComboBox<>();
+        jComboBoxOrigen = new javax.swing.JComboBox<>();
+        jComboBoxDestino = new javax.swing.JComboBox<>();
         jSeparator1 = new javax.swing.JSeparator();
-        jComboBox3 = new javax.swing.JComboBox<>();
+        jComboBoxWL = new javax.swing.JComboBox<>();
         jSeparator2 = new javax.swing.JSeparator();
-        jComboBox4 = new javax.swing.JComboBox<>();
-        jComboBox5 = new javax.swing.JComboBox<>();
-        jComboBox6 = new javax.swing.JComboBox<>();
+        jComboBoxFOExt = new javax.swing.JComboBox<>();
+        jComboBoxFOInt = new javax.swing.JComboBox<>();
+        jComboBoxTXOpt = new javax.swing.JComboBox<>();
         jSeparator3 = new javax.swing.JSeparator();
-        jComboBox7 = new javax.swing.JComboBox<>();
-        jComboBox8 = new javax.swing.JComboBox<>();
-        jComboBox9 = new javax.swing.JComboBox<>();
-        jComboBox10 = new javax.swing.JComboBox<>();
-        jComboBox11 = new javax.swing.JComboBox<>();
-        jComboBox12 = new javax.swing.JComboBox<>();
-        jComboBox13 = new javax.swing.JComboBox<>();
-        jComboBox14 = new javax.swing.JComboBox<>();
-        jComboBox15 = new javax.swing.JComboBox<>();
-        jComboBox16 = new javax.swing.JComboBox<>();
-        jButton1 = new javax.swing.JButton();
+        jComboBoxConectores = new javax.swing.JComboBox<>();
+        jComboBoxEmpalmes = new javax.swing.JComboBox<>();
+        jComboBoxAmplificadores = new javax.swing.JComboBox<>();
+        jComboBoxAtenuadores = new javax.swing.JComboBox<>();
+        jComboBoxReceptores = new javax.swing.JComboBox<>();
+        jComboBoxPzasConectores = new javax.swing.JComboBox<>();
+        jComboBoxPzasEmpalmes = new javax.swing.JComboBox<>();
+        jComboBoxPzasReceptores = new javax.swing.JComboBox<>();
+        jComboBoxPzasAmplificadores = new javax.swing.JComboBox<>();
+        jComboBoxPzasAtenuadores = new javax.swing.JComboBox<>();
+        jButtonOK = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("Lucida Grande", 0, 24)); // NOI18N
         jLabel1.setText("Generar tramo");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Origen", "La Paz, Baja California Sur" }));
+        jComboBoxOrigen.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Origen", "La Paz, Baja California Sur" }));
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Destino", "Cd. Constitución, Baja California Sur" }));
+        jComboBoxDestino.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Destino", "Cd. Constitución, Baja California Sur" }));
 
-        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Longitud de onda", "1310", "1530", "1548" }));
+        jComboBoxWL.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Longitud de onda", "1310", "1550" }));
+        jComboBoxWL.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxWLActionPerformed(evt);
+            }
+        });
 
-        jComboBox4.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Fibra óptica externa" }));
+        jComboBoxFOExt.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Fibra óptica externa" }));
 
-        jComboBox5.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Fibra óptica interna" }));
+        jComboBoxFOInt.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Fibra óptica interna" }));
 
-        jComboBox6.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Transmisor óptico" }));
+        jComboBoxTXOpt.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Transmisor óptico" }));
 
-        jComboBox7.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Conectores" }));
+        jComboBoxConectores.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Conectores" }));
 
-        jComboBox8.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Empalmes" }));
+        jComboBoxEmpalmes.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Empalmes" }));
 
-        jComboBox9.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Amplificadores" }));
+        jComboBoxAmplificadores.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Amplificadores" }));
 
-        jComboBox10.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Atenuadores" }));
+        jComboBoxAtenuadores.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Atenuadores" }));
 
-        jComboBox11.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Receptores" }));
+        jComboBoxReceptores.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Receptores" }));
 
-        jComboBox12.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Piezas", "1", "2", "3", "4", "5" }));
+        jComboBoxPzasConectores.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Piezas", "1", "2", "3", "4", "5" }));
 
-        jComboBox13.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Piezas", "1", "2", "3", "4", "5" }));
+        jComboBoxPzasEmpalmes.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Piezas", "1", "2", "3", "4", "5" }));
 
-        jComboBox14.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Piezas", "1", "2", "3", "4", "5" }));
+        jComboBoxPzasReceptores.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Piezas", "1", "2", "3", "4", "5" }));
 
-        jComboBox15.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Piezas", "1", "2", "3", "4", "5" }));
+        jComboBoxPzasAmplificadores.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Piezas", "1", "2", "3", "4", "5" }));
 
-        jComboBox16.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Piezas", "1", "2", "3", "4", "5" }));
+        jComboBoxPzasAtenuadores.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Piezas", "1", "2", "3", "4", "5" }));
 
-        jButton1.setText("Cotizar");
+        jButtonOK.setText("Cotizar");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -120,39 +126,39 @@ public class Tramo extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jSeparator2)
-                    .addComponent(jComboBox4, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jComboBox5, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jComboBox6, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jComboBoxFOExt, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jComboBoxFOInt, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jComboBoxTXOpt, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jSeparator3)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jComboBox7, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jComboBoxConectores, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jComboBox12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jComboBoxPzasConectores, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jComboBox8, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jComboBoxEmpalmes, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jComboBox13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jComboBoxPzasEmpalmes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jComboBox11, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jComboBoxReceptores, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jComboBox14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jComboBoxPzasReceptores, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jComboBox9, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jComboBoxAmplificadores, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jComboBox15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jComboBoxPzasAmplificadores, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jComboBox10, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jComboBoxAtenuadores, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jComboBox16, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jComboBoxPzasAtenuadores, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jLabel1)
-                            .addComponent(jComboBox1, 0, 260, Short.MAX_VALUE)
-                            .addComponent(jComboBox2, 0, 0, Short.MAX_VALUE)
+                            .addComponent(jComboBoxOrigen, 0, 260, Short.MAX_VALUE)
+                            .addComponent(jComboBoxDestino, 0, 0, Short.MAX_VALUE)
                             .addComponent(jSeparator1)
-                            .addComponent(jComboBox3, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(jComboBoxWL, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jButtonOK, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -161,54 +167,97 @@ public class Tramo extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
-                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jComboBoxOrigen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jComboBoxDestino, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jComboBoxWL, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jComboBox4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jComboBoxFOExt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jComboBox5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jComboBoxFOInt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jComboBox6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jComboBoxTXOpt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jComboBox7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jComboBoxConectores, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jComboBoxPzasConectores, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jComboBox8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jComboBoxEmpalmes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jComboBoxPzasEmpalmes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jComboBox9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jComboBoxAmplificadores, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jComboBoxPzasAmplificadores, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jComboBox10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox16, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jComboBoxAtenuadores, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jComboBoxPzasAtenuadores, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jComboBox11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jComboBoxReceptores, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jComboBoxPzasReceptores, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton1)
+                .addComponent(jButtonOK)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    /**
-     * @param args the command line arguments
-     */
+    private void jComboBoxWLActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxWLActionPerformed
+        // TODO add your handling code here:
+        String seleccion = jComboBoxWL.getSelectedItem().toString();
+        if (seleccion != "Longitud de onda") {
+            System.out.println(seleccion);
+            desbloquearComboBoxes();
+        } else {
+            System.out.println("Elige un valor válido");
+            bloquearComboBoxes();
+        }
+    }//GEN-LAST:event_jComboBoxWLActionPerformed
+
+    private void bloquearComboBoxes() {
+        jComboBoxFOExt.setEnabled(false);
+        jComboBoxFOInt.setEnabled(false);
+        jComboBoxTXOpt.setEnabled(false);
+        
+        jComboBoxConectores.setEnabled(false);
+        jComboBoxPzasConectores.setEnabled(false);
+        jComboBoxEmpalmes.setEnabled(false);
+        jComboBoxPzasEmpalmes.setEnabled(false);
+        jComboBoxAmplificadores.setEnabled(false);
+        jComboBoxPzasAmplificadores.setEnabled(false);
+        jComboBoxAtenuadores.setEnabled(false);
+        jComboBoxPzasAtenuadores.setEnabled(false);
+        jComboBoxReceptores.setEnabled(false);
+        jComboBoxPzasReceptores.setEnabled(false);
+    }
+    
+    private void desbloquearComboBoxes() {
+        jComboBoxFOExt.setEnabled(true);
+        jComboBoxFOInt.setEnabled(true);
+        jComboBoxTXOpt.setEnabled(true);
+        
+        jComboBoxConectores.setEnabled(true);
+        jComboBoxPzasConectores.setEnabled(true);
+        jComboBoxEmpalmes.setEnabled(true);
+        jComboBoxPzasEmpalmes.setEnabled(true);
+        jComboBoxAmplificadores.setEnabled(true);
+        jComboBoxPzasAmplificadores.setEnabled(true);
+        jComboBoxAtenuadores.setEnabled(true);
+        jComboBoxPzasAtenuadores.setEnabled(true);
+        jComboBoxReceptores.setEnabled(true);
+        jComboBoxPzasReceptores.setEnabled(true);
+    }
+    
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -248,23 +297,23 @@ public class Tramo extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox10;
-    private javax.swing.JComboBox<String> jComboBox11;
-    private javax.swing.JComboBox<String> jComboBox12;
-    private javax.swing.JComboBox<String> jComboBox13;
-    private javax.swing.JComboBox<String> jComboBox14;
-    private javax.swing.JComboBox<String> jComboBox15;
-    private javax.swing.JComboBox<String> jComboBox16;
-    private javax.swing.JComboBox<String> jComboBox2;
-    private javax.swing.JComboBox<String> jComboBox3;
-    private javax.swing.JComboBox<String> jComboBox4;
-    private javax.swing.JComboBox<String> jComboBox5;
-    private javax.swing.JComboBox<String> jComboBox6;
-    private javax.swing.JComboBox<String> jComboBox7;
-    private javax.swing.JComboBox<String> jComboBox8;
-    private javax.swing.JComboBox<String> jComboBox9;
+    private javax.swing.JButton jButtonOK;
+    private javax.swing.JComboBox<String> jComboBoxAmplificadores;
+    private javax.swing.JComboBox<String> jComboBoxAtenuadores;
+    private javax.swing.JComboBox<String> jComboBoxConectores;
+    private javax.swing.JComboBox<String> jComboBoxDestino;
+    private javax.swing.JComboBox<String> jComboBoxEmpalmes;
+    private javax.swing.JComboBox<String> jComboBoxFOExt;
+    private javax.swing.JComboBox<String> jComboBoxFOInt;
+    private javax.swing.JComboBox<String> jComboBoxOrigen;
+    private javax.swing.JComboBox<String> jComboBoxPzasAmplificadores;
+    private javax.swing.JComboBox<String> jComboBoxPzasAtenuadores;
+    private javax.swing.JComboBox<String> jComboBoxPzasConectores;
+    private javax.swing.JComboBox<String> jComboBoxPzasEmpalmes;
+    private javax.swing.JComboBox<String> jComboBoxPzasReceptores;
+    private javax.swing.JComboBox<String> jComboBoxReceptores;
+    private javax.swing.JComboBox<String> jComboBoxTXOpt;
+    private javax.swing.JComboBox<String> jComboBoxWL;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
