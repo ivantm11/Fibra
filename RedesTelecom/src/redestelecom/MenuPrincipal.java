@@ -22,7 +22,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         BaseDeDatos = conexionActiva;
         this.setLocationRelativeTo(null);
         setResizable(false);
-        setTitle("Menú");
+        setTitle(".:: Menú ::.");
     }
 
     /**
@@ -97,7 +97,8 @@ public class MenuPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonProductosActionPerformed
 
     private void jButtonProgramaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonProgramaActionPerformed
-        // TODO add your handling code here:
+        Tramo ventanaTramo = new Tramo(BaseDeDatos);
+        ventanaTramo.setVisible(true);
     }//GEN-LAST:event_jButtonProgramaActionPerformed
 
     /**

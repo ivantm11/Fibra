@@ -19,7 +19,7 @@ public class Productos extends javax.swing.JFrame {
         BaseDeDatos = conexionActiva;
         this.setLocationRelativeTo(null);
         setResizable(false);
-        setTitle("Redes de telecomunicaciones :: Productos");
+        setTitle(".:: Productos ::.");
     }
     
     @SuppressWarnings("unchecked")
