@@ -10,6 +10,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -19,6 +20,8 @@ import java.util.logging.Logger;
  */
 public class Tramo extends javax.swing.JFrame {
     private Connection BaseDeDatos;
+    private String []DatosEquipo = new String[5];
+    private String []Fibras = new String[10]; 
 
     /**
      * Creates new form Tramo
@@ -30,19 +33,8 @@ public class Tramo extends javax.swing.JFrame {
         setResizable(false);
         setTitle(".:: Generar tramo ::.");
         bloquearComboBoxes();
-        loadData();
     }
     
-    private void loadData() throws SQLException {
-        PreparedStatement ps = null;
-        ResultSet rs = null;
-        String sql = ("SELECT fabricante, tipo, WL, atenuacion, BW, LC, Costo, exterior, interior FROM producto");
-        ps = BaseDeDatos.prepareStatement(sql);
-        rs = ps.executeQuery();
-
-        ResultSetMetaData rsMd = rs.getMetaData();
-    }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -218,12 +210,42 @@ public class Tramo extends javax.swing.JFrame {
         if (seleccion != "Longitud de onda") {
             System.out.println(seleccion);
             desbloquearComboBoxes();
+            int longOnda = Integer.parseInt(seleccion);
+            try {
+                loadFO(longOnda, "exterior");
+                //loadFO(longOnda, "interior");
+            } catch (SQLException ex) {
+                Logger.getLogger(Tramo.class.getName()).log(Level.SEVERE, null, ex);
+            }
         } else {
             System.out.println("Elige un valor válido");
             bloquearComboBoxes();
         }
     }//GEN-LAST:event_jComboBoxWLActionPerformed
 
+    private void loadFO(int WL, String modo) throws SQLException {
+        String instruccion;
+        Statement consulta;
+        ResultSet respuesta;
+        consulta = BaseDeDatos.createStatement();
+        instruccion = "select * from producto where WL=" + Integer.toString(WL) + " and " + modo + " = true";
+        respuesta = consulta.executeQuery(instruccion);
+        int i = 0;
+        while(respuesta.next()){
+            Fibras[i] = respuesta.getString("Fabricante") + " " + respuesta.getString("Tipo") + ".";
+            System.out.println("Fibra: " + Fibras[i]);
+            i++;
+        }
+    }
+    
+    private void colocarFOExterna() {
+        //
+    }
+    
+    private void colocarFOInterna() {
+        //
+    }
+    
     private void bloquearComboBoxes() {
         jComboBoxFOExt.setEnabled(false);
         jComboBoxFOInt.setEnabled(false);

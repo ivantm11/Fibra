@@ -224,7 +224,7 @@ public class producto extends javax.swing.JFrame {
                 for (int i = 0;i < cantidadColumnas; i++ ) {
                     filas[i] = rs.getObject(i+1);
                 }
-            modelo.addRow(filas);
+                modelo.addRow(filas);
             }
         } catch(SQLException ex) {
             System.err.println(ex.toString());
