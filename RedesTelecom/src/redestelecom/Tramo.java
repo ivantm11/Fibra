@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package redestelecom;
 
 import java.sql.Connection;
@@ -14,18 +9,16 @@ import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-/**
- *
- * @author ivantrejo
- */
+
+
 public class Tramo extends javax.swing.JFrame {
     private Connection BaseDeDatos;
     private String []DatosEquipo = new String[5];
     private String []Fibras = new String[10]; 
+    private String []RX = new String[10];
+    private String []TX = new String[15];
 
-    /**
-     * Creates new form Tramo
-     */
+ 
     public Tramo(Connection conexionActiva) throws SQLException {
         initComponents();
         BaseDeDatos = conexionActiva;
@@ -33,6 +26,8 @@ public class Tramo extends javax.swing.JFrame {
         setResizable(false);
         setTitle(".:: Generar tramo ::.");
         bloquearComboBoxes();
+       
+        
     }
     
     /**
@@ -75,20 +70,34 @@ public class Tramo extends javax.swing.JFrame {
 
         jComboBoxDestino.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Destino", "Cd. Constitución, Baja California Sur" }));
 
-        jComboBoxWL.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Longitud de onda", "1310", "1550" }));
+        jComboBoxWL.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Longitud de onda", "1310", "1550", " " }));
         jComboBoxWL.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBoxWLActionPerformed(evt);
             }
         });
 
-        jComboBoxFOExt.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Fibra óptica externa" }));
+        jComboBoxFOExt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxFOExtActionPerformed(evt);
+            }
+        });
 
-        jComboBoxFOInt.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Fibra óptica interna" }));
+        jComboBoxFOInt.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Fibra óptica interna", " " }));
+        jComboBoxFOInt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxFOIntActionPerformed(evt);
+            }
+        });
 
         jComboBoxTXOpt.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Transmisor óptico" }));
 
         jComboBoxConectores.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Conectores" }));
+        jComboBoxConectores.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxConectoresActionPerformed(evt);
+            }
+        });
 
         jComboBoxEmpalmes.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Empalmes" }));
 
@@ -97,8 +106,18 @@ public class Tramo extends javax.swing.JFrame {
         jComboBoxAtenuadores.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Atenuadores" }));
 
         jComboBoxReceptores.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Receptores" }));
+        jComboBoxReceptores.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxReceptoresActionPerformed(evt);
+            }
+        });
 
         jComboBoxPzasConectores.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Piezas", "1", "2", "3", "4", "5" }));
+        jComboBoxPzasConectores.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxPzasConectoresActionPerformed(evt);
+            }
+        });
 
         jComboBoxPzasEmpalmes.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Piezas", "1", "2", "3", "4", "5" }));
 
@@ -212,8 +231,10 @@ public class Tramo extends javax.swing.JFrame {
             desbloquearComboBoxes();
             int longOnda = Integer.parseInt(seleccion);
             try {
+                loadRX(longOnda);
+                loadTX(longOnda);
                 loadFO(longOnda, "exterior");
-                //loadFO(longOnda, "interior");
+                loadFO(longOnda, "interior");
             } catch (SQLException ex) {
                 Logger.getLogger(Tramo.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -223,23 +244,101 @@ public class Tramo extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jComboBoxWLActionPerformed
 
+    private void jComboBoxFOExtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxFOExtActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBoxFOExtActionPerformed
+
+    private void jComboBoxPzasConectoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxPzasConectoresActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBoxPzasConectoresActionPerformed
+
+    private void jComboBoxConectoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxConectoresActionPerformed
+        
+    }//GEN-LAST:event_jComboBoxConectoresActionPerformed
+
+    private void jComboBoxReceptoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxReceptoresActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBoxReceptoresActionPerformed
+
+    private void jComboBoxFOIntActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxFOIntActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBoxFOIntActionPerformed
+
+       private void loadRX (int WL) throws SQLException {
+    String instruccion;
+    Statement consulta;
+    ResultSet rs;
+    consulta = BaseDeDatos.createStatement();
+     jComboBoxReceptores.removeAllItems();
+ 
+     instruccion =  "select * from rx  where WL =" + Integer.toString(WL); //ORDER by 
+     //instruccion = "Select * from rx order by price";
+     rs= consulta.executeQuery(instruccion);
+     int i = 0;
+     while (rs.next()){
+     RX[i]= rs.getString("Nombre");
+     System.out.println("Receptores " + RX[i] );
+     i++;
+             jComboBoxReceptores.addItem(rs.getString("Nombre"));
+     }
+    }
+       
+           private void loadTX (int WL) throws SQLException {
+    String instruccion;
+    Statement consulta;
+    ResultSet rs;
+    consulta = BaseDeDatos.createStatement();
+     jComboBoxTXOpt.removeAllItems();
+ 
+     instruccion =  "select * from txoptic  where WL =" + Integer.toString(WL); //ORDER by 
+     //instruccion = "Select * from rx order by price";
+     rs= consulta.executeQuery(instruccion);
+     int i = 0;
+     while (rs.next()){
+     TX[i]= rs.getString("Nombre");
+     System.out.println("Transmisores " + TX[i] );
+     i++;
+             jComboBoxTXOpt.addItem(rs.getString("Nombre"));
+     }
+    }
+    
     private void loadFO(int WL, String modo) throws SQLException {
         String instruccion;
+        String instruccion2;
         Statement consulta;
+        Statement consulta1;
         ResultSet respuesta;
+        ResultSet res;
         consulta = BaseDeDatos.createStatement();
-        instruccion = "select * from producto where WL=" + Integer.toString(WL) + " and " + modo + " = true";
+        consulta1= BaseDeDatos.createStatement();
+        jComboBoxFOExt.removeAllItems();
+        jComboBoxFOInt.removeAllItems();
+        instruccion = "select * from producto where WL=" + Integer.toString(WL) + " and " + modo + " = true order by costo";//Fibras Exterior 
+        instruccion2 = "select * from producto where WL=" + Integer.toString(WL) + " and " + modo + " = false order by costo";
         respuesta = consulta.executeQuery(instruccion);
+        res = consulta1.executeQuery(instruccion2);
+        //Fibras interiores
         int i = 0;
         while(respuesta.next()){
             Fibras[i] = respuesta.getString("Fabricante") + " " + respuesta.getString("Tipo") + ".";
             System.out.println("Fibra: " + Fibras[i]);
             i++;
+            jComboBoxFOExt.addItem(respuesta.getString("Fabricante"));          
+        } 
+       respuesta.close();
+
+        int j = 0;
+        while (res.next()){
+           Fibras[j] = res.getString("Fabricante") + " " + res.getString("Tipo") + ".";
+           System.out.println("Fibra: " + Fibras[i]);
+           j++;
+           jComboBoxFOInt.addItem(res.getString("Fabricante"));
         }
     }
+     
+ 
     
     private void colocarFOExterna() {
-        //
     }
     
     private void colocarFOInterna() {

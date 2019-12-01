@@ -83,7 +83,7 @@ create table producto(
 	Fabricante varchar(100) not null,
     Tipo varchar(100) not null,
     WL int(50) not null,
-    atenuacion int(75) not null,
+    atenuacion float not null,
     BW int(75) not null,
     LC int(75) not null,
     costo float not null,
@@ -92,15 +92,15 @@ create table producto(
 );
 
 insert into producto values
-	('1','OFS3-200','unimodo',1310,3,200,9,16,1,1),
-    ('2','OFS2-200','unimodo',1310,2,200,9,16,1,1),
-    ('3','OFS0-200','monomodo',1550,0,200,50,13,0,1),
-    ('4','OFS2-950','unimodo',1310,2,950,9,18,1,0),
-    ('5','OFS0-200','monomodo',1550,0,200,50,13,0,1),
-    ('6','Sumitomo Electric 1310','monomodo',1310,0,250,11,1.25,1,0),
-    ('7','Sumitomo Electric 1550','monomodo',1550,0,250,11,1.25,1,0),
+	('1','OFS3-200','unimodo',1310,3,200,900,16,1,1),
+    ('2','OFS2-200','unimodo',1310,2,200,900,16,1,1),
+    ('3','OFS0-200','monomodo',1550,0.3,200,500,13,0,1),
+    ('4','OFS2-950','unimodo',1310,2,950,90,18,1,0),
+    ('5','OFS0-200','monomodo',1550,0,200,500,13,0,1),
+    ('6','Sumitomo Electric 1310','monomodo',1310,0.3,250,110,1.25,1,0),
+    ('7','Sumitomo Electric 1550','monomodo',1550,0.3,250,110,1.25,1,0),
     ('8','Corning 1310','unimodo',1310,2,500,40,2.7,1,1),
-    ('9','Corning 1310','monomodo',1550,0,500,11,3,1,1);
+    ('9','Corning 1310','monomodo',1550,0.3,500,11,3,1,1);
 
 drop table rx;
 create table rx(
@@ -114,7 +114,7 @@ create table rx(
 
 insert into rx values
 	('1','AFBR',611.52,-22,2,1550),
-    ('2','S10',304.79,-5,-12,1550),
+    ('2','S10',304.79,-12,-5,1550),
     ('3','AFBR-1555ARZ',489.26,-20,-1,1550),
     ('4','AFBR-2624ARZ',445.27,-4.5,2,1310),
     ('5','HFBR-2406z',483.44,-21.8,-16.8,1310),
@@ -150,3 +150,27 @@ select * from rx where WL=1550;
 
 select * from txoptic where WL=1310;
 select * from txoptic where WL=1550;
+
+
+select * from amplificadores order by costo;
+select * from atenuadores order by precio;
+select * from conectores order by precio;
+select * from empalmes order by precio;
+select precio * .05  as Precio_percent from empalmes;
+
+select * from producto order by costo;
+select * from rx order by precio;
+select * from txoptic order by costo;
+
+
+select * from producto where WL=1310 order by costo;
+select * from producto where WL=1550 order by costo;
+
+select * from rx where WL=1310 order by precio;
+select * from rx where WL=1550 order by precio;
+
+select * from txoptic where WL=1310 order by costo;
+select * from txoptic where WL=1550 order by costo;
+
+
+
