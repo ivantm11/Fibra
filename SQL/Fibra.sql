@@ -3,6 +3,7 @@ use fibra;
 
 drop database fibra;
 drop table amplificadores;
+
 create table amplificadores(
 	IdAmplificador  int (10),
 	nombre varchar(60) not null,
@@ -23,6 +24,7 @@ insert into amplificadores values
     ('6','Optico 16WDM',0,10,16,22,0,39800.5);
 
 drop table atenuadores;
+
 create table atenuadores(
 	IdAtenuadores int(10),
 	nombre varchar(50) not null,
@@ -40,6 +42,7 @@ insert into atenuadores values
     ('7','Atenuador Fijado SC',86,2);
 
 drop table conectores;
+
 create table conectores(
 	idConector int (10),
 	conector varchar(75) not null,
@@ -61,6 +64,7 @@ insert into conectores values
     ('9','MTX',1548,'Alta velocidad y densidad de datos y redes de comunicación de datos','multimodo',0.25);
 
 drop table empalmes;
+
 create table empalmes(
 	IdEmpalmes int (10),
 	nombre varchar(40) not null,
@@ -78,6 +82,7 @@ insert into empalmes values
     ('7','Sumitomo',139569,0.05);
 
 drop table producto;
+
 create table producto(
 	IdProducto int (10),
 	Fabricante varchar(100) not null,
@@ -103,6 +108,7 @@ insert into producto values
     ('9','Corning 1310','monomodo',1550,0.3,500,11,3,1,1);
 
 drop table rx;
+
 create table rx(
 	IdReceptor int (10),
 	Nombre varchar(50) not null,
@@ -122,6 +128,7 @@ insert into rx values
 
 
 drop table txoptic;
+
 create table txoptic(
 	IdTxoptic int (10),
 	Nombre varchar(70) not null,
