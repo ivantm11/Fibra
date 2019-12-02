@@ -134,6 +134,14 @@ public class Tramo extends javax.swing.JFrame {
         this.putTXOptico();
     }
     
+    private void putPiezas(){
+        this.putAmplificadorPzas("0");
+        this.putAtenuadorPzas("0");
+        this.putConectorPzas("0");
+        this.putEmpalmePzas("0");
+        this.putReceptorPzas("0");
+    }
+    
     private void loadAmplificador() throws SQLException {
         this.amplificador = this.BD.getAmplificador();
     }
@@ -196,6 +204,26 @@ public class Tramo extends javax.swing.JFrame {
     
     private void putTXOptico() {
         jTextFieldTxOptico.setText(this.transmisorOptico.mensaje);
+    }
+    
+    private void putAmplificadorPzas(String pzas) {
+        jTextFieldAmplificadorPzas.setText(pzas);
+    }
+    
+    private void putAtenuadorPzas(String pzas) {
+        jTextFieldAtenuadorPzas.setText(pzas);
+    }
+    
+    private void putConectorPzas(String pzas) {
+        jTextFieldConectorPzas.setText(pzas);
+    }
+    
+    private void putEmpalmePzas(String pzas) {
+        jTextFieldEmpalmePzas.setText(pzas);
+    }
+    
+    private void putReceptorPzas(String pzas) {
+        jTextFieldReceptorPzas.setText(pzas);
     }
     
     /**
