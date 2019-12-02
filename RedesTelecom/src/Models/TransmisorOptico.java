@@ -13,16 +13,15 @@ public class TransmisorOptico {
     int IdTxoptic;
     String Nombre;
     int WL;
-    int Potencia ;
+    int Potencia;
     float costo;
     
     public TransmisorOptico(int IdTxoptic, String Nombre, int WL, int Potencia, float costo){
-    this.IdTxoptic = IdTxoptic;
-    this.Nombre = Nombre;
-    this.Potencia = Potencia;
-    this.WL = WL;
-    this.costo = costo;
-    
+        this.IdTxoptic = IdTxoptic;
+        this.Nombre = Nombre;
+        this.Potencia = Potencia;
+        this.WL = WL;
+        this.costo = costo;
     }
     
 }
