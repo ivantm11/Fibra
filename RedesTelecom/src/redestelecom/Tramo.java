@@ -17,7 +17,10 @@ public class Tramo extends javax.swing.JFrame {
     private String []Fibras = new String[20]; 
     private String []RX = new String[10];
     private String []TX = new String[15];
-    
+    private String []Conec = new String[15];
+    private String []Amp = new String[20];
+    private String []Ate = new String[20];
+    private String []Em = new String[20];
     private int cantFOExt;
     private int cantFOInt;
 
@@ -233,6 +236,10 @@ public class Tramo extends javax.swing.JFrame {
             desbloquearComboBoxes();
             int longOnda = Integer.parseInt(seleccion);
             try {
+                loadConectores();
+                loadEmpalmes();
+                loadAmplificadores();
+                loadAtenuador();
                 loadRX(longOnda);
                 loadTX(longOnda);
                 loadFO(longOnda, "exterior");
@@ -328,6 +335,82 @@ public class Tramo extends javax.swing.JFrame {
         }
     }
     
+    private void loadConectores() throws SQLException{ //Conectores
+        String instruccion;
+        Statement consulta;
+        ResultSet rs;
+        consulta = BaseDeDatos.createStatement();
+        jComboBoxConectores.removeAllItems();
+ 
+        instruccion =  "select * from conectores order by precio"; //ORDER by 
+        //instruccion = "Select * from rx order by price";
+        rs= consulta.executeQuery(instruccion);
+        int i = 0;
+        while (rs.next()){
+            Conec[i]= rs.getString("conector");
+            System.out.println("Conectores " + Conec[i] );
+            i++;
+            jComboBoxConectores.addItem(rs.getString("conector"));
+        }
+    }
+    
+     private void loadEmpalmes() throws SQLException{ //Empalmes 
+        String instruccion;
+        Statement consulta;
+        ResultSet rs;
+        consulta = BaseDeDatos.createStatement();
+        jComboBoxEmpalmes.removeAllItems();
+ 
+        instruccion =  "select * from empalmes order by precio"; //ORDER by 
+        //instruccion = "Select * from rx order by price";
+        rs= consulta.executeQuery(instruccion);
+        int i = 0;
+        while (rs.next()){
+            Em[i]= rs.getString("nombre");
+            System.out.println("Empalmes " + Em[i] );
+            i++;
+            jComboBoxEmpalmes.addItem(rs.getString("nombre"));
+        }
+    }
+     
+       private void loadAmplificadores() throws SQLException{ //Amplificadores
+        String instruccion;
+        Statement consulta;
+        ResultSet rs;
+        consulta = BaseDeDatos.createStatement();
+        jComboBoxAmplificadores.removeAllItems();
+ 
+        instruccion =  "select * from amplificadores order by costo"; //ORDER by 
+        //instruccion = "Select * from rx order by price";
+        rs= consulta.executeQuery(instruccion);
+        int i = 0;
+        while (rs.next()){
+            Amp[i]= rs.getString("nombre");
+            System.out.println("Amplificadores " + Amp[i] );
+            i++;
+            jComboBoxAmplificadores.addItem(rs.getString("nombre"));
+        }
+    }
+    
+        private void loadAtenuador() throws SQLException{ //Atenuadores
+        String instruccion;
+        Statement consulta;
+        ResultSet rs;
+        consulta = BaseDeDatos.createStatement();
+        jComboBoxAtenuadores.removeAllItems();
+ 
+        instruccion =  "select * from atenuadores order by precio"; //ORDER by 
+        //instruccion = "Select * from rx order by price";
+        rs= consulta.executeQuery(instruccion);
+        int i = 0;
+        while (rs.next()){
+            Ate[i]= rs.getString("nombre");
+            System.out.println("Atenuadores " + Ate[i] );
+            i++;
+            jComboBoxAtenuadores.addItem(rs.getString("nombre"));
+        }
+    }
+       
     private void colocarFOExterna() {
         jComboBoxFOExt.removeAllItems();
         for(int l=0; l<=cantFOExt; l++){
