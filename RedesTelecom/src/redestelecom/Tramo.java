@@ -14,7 +14,7 @@ import java.util.logging.Logger;
 public class Tramo extends javax.swing.JFrame {
     private Connection BaseDeDatos;
     private String []DatosEquipo = new String[5];
-    private String []Fibras = new String[20]; 
+    private String []FibraExt = new String[20]; 
     private String []RX = new String[10];
     private String []TX = new String[15];
     private String []Conec = new String[15];
@@ -48,7 +48,6 @@ public class Tramo extends javax.swing.JFrame {
         jComboBoxDestino = new javax.swing.JComboBox<>();
         jSeparator1 = new javax.swing.JSeparator();
         jComboBoxWL = new javax.swing.JComboBox<>();
-        jComboBoxFOExt = new javax.swing.JComboBox<>();
         jComboBoxFOInt = new javax.swing.JComboBox<>();
         jComboBoxTXOpt = new javax.swing.JComboBox<>();
         jSeparator3 = new javax.swing.JSeparator();
@@ -72,6 +71,7 @@ public class Tramo extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
+        jTextFieldFOExt = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -86,15 +86,6 @@ public class Tramo extends javax.swing.JFrame {
         jComboBoxWL.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBoxWLActionPerformed(evt);
-            }
-        });
-
-        jComboBoxFOExt.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Fibra óptica externa" }));
-        jComboBoxFOExt.setMinimumSize(new java.awt.Dimension(166, 27));
-        jComboBoxFOExt.setPreferredSize(new java.awt.Dimension(166, 27));
-        jComboBoxFOExt.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBoxFOExtActionPerformed(evt);
             }
         });
 
@@ -183,8 +174,8 @@ public class Tramo extends javax.swing.JFrame {
                                     .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.LEADING))
-                                .addComponent(jComboBoxFOExt, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGap(24, 24, 24)
+                                .addComponent(jTextFieldFOExt, javax.swing.GroupLayout.PREFERRED_SIZE, 266, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGap(18, 18, 18)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addComponent(jLabel4)
                                 .addComponent(jLabel2)
@@ -243,9 +234,9 @@ public class Tramo extends javax.swing.JFrame {
                     .addComponent(jLabel3)
                     .addComponent(jLabel4))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jComboBoxFOInt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBoxFOExt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextFieldFOExt, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
@@ -301,6 +292,7 @@ public class Tramo extends javax.swing.JFrame {
                 loadAtenuador();
                 loadRX(longOnda);
                 loadTX(longOnda);
+                
                 loadFO(longOnda, "exterior");
                 colocarFOExterna();
                 loadFO(longOnda, "interior");
@@ -313,10 +305,6 @@ public class Tramo extends javax.swing.JFrame {
             bloquearComboBoxes();
         }
     }//GEN-LAST:event_jComboBoxWLActionPerformed
-
-    private void jComboBoxFOExtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxFOExtActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBoxFOExtActionPerformed
 
     private void jComboBoxPzasConectoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxPzasConectoresActionPerformed
         // TODO add your handling code here:
@@ -372,7 +360,8 @@ public class Tramo extends javax.swing.JFrame {
         }
     }
     
-    private void loadFO(int WL, String modo) throws SQLException {
+    private String[] loadFO(int WL, String modo) throws SQLException {
+        String []resultado = new String[10];
         String instruccion;
         Statement consulta;
         ResultSet respuesta;
@@ -380,17 +369,25 @@ public class Tramo extends javax.swing.JFrame {
         consulta = BaseDeDatos.createStatement();
         instruccion = "select * from producto where WL=" + Integer.toString(WL) + " and " + modo + " = true order by costo";
         respuesta = consulta.executeQuery(instruccion);
-        int i = 0;
-        while(respuesta.next()){
-            Fibras[i] = respuesta.getString("Fabricante") + " " + respuesta.getString("Tipo");
-            System.out.println("Fibra: " + Fibras[i]);
-            i++;       
-        }
+        
+        respuesta.next();
+        resultado[0] = respuesta.getString("");
+        FibraExt[0] = respuesta.getString("Fabricante") + " " + respuesta.getString("Tipo");
+        System.out.println("Fibra: " + FibraExt[0]);
         respuesta.close();
-        if (modo == "exterior") {
-            cantFOExt = i;
-        } else {
-            cantFOInt = i;
+        return resultado;
+    }
+    
+    private void colocarFOExterna() {
+        for(int l=0; l<=cantFOExt; l++){
+            jTextFieldFOExt.setText(FibraExt[l]);
+        }
+    }
+    
+    private void colocarFOInterna() {
+        jComboBoxFOInt.removeAllItems();
+        for(int l=0; l<=cantFOInt; l++){
+            jComboBoxFOInt.addItem(FibraExt[l]);
         }
     }
     
@@ -413,15 +410,14 @@ public class Tramo extends javax.swing.JFrame {
         }
     }
     
-     private void loadEmpalmes() throws SQLException{ //Empalmes 
+    private void loadEmpalmes() throws SQLException{ //Empalmes 
         String instruccion;
         Statement consulta;
         ResultSet rs;
         consulta = BaseDeDatos.createStatement();
         jComboBoxEmpalmes.removeAllItems();
  
-        instruccion =  "select * from empalmes order by precio"; //ORDER by 
-        //instruccion = "Select * from rx order by price";
+        instruccion =  "select * from empalmes order by precio";
         rs= consulta.executeQuery(instruccion);
         int i = 0;
         while (rs.next()){
@@ -432,7 +428,7 @@ public class Tramo extends javax.swing.JFrame {
         }
     }
      
-       private void loadAmplificadores() throws SQLException{ //Amplificadores
+    private void loadAmplificadores() throws SQLException{ //Amplificadores
         String instruccion;
         Statement consulta;
         ResultSet rs;
@@ -451,7 +447,7 @@ public class Tramo extends javax.swing.JFrame {
         }
     }
     
-        private void loadAtenuador() throws SQLException{ //Atenuadores
+    private void loadAtenuador() throws SQLException{ //Atenuadores
         String instruccion;
         Statement consulta;
         ResultSet rs;
@@ -469,25 +465,9 @@ public class Tramo extends javax.swing.JFrame {
             jComboBoxAtenuadores.addItem(rs.getString("nombre"));
         }
     }
-       
-    private void colocarFOExterna() {
-        jComboBoxFOExt.removeAllItems();
-        for(int l=0; l<=cantFOExt; l++){
-            jComboBoxFOExt.addItem(Fibras[l]);
-        }
-        jComboBoxFOExt.addItem("Fibra óptica externa");
-    }
-    
-    private void colocarFOInterna() {
-        jComboBoxFOInt.removeAllItems();
-        for(int l=0; l<=cantFOInt; l++){
-            jComboBoxFOInt.addItem(Fibras[l]);
-        }
-        jComboBoxFOInt.addItem("Fibra óptica interna");
-    }
     
     private void bloquearComboBoxes() {
-        jComboBoxFOExt.setEnabled(false);
+        jTextFieldFOExt.setEnabled(false);
         jComboBoxFOInt.setEnabled(false);
         jComboBoxTXOpt.setEnabled(false);
         
@@ -501,10 +481,12 @@ public class Tramo extends javax.swing.JFrame {
         jComboBoxPzasAtenuadores.setEnabled(false);
         jComboBoxReceptores.setEnabled(false);
         jComboBoxPzasReceptores.setEnabled(false);
+        
+        jButtonOK.setEnabled(false);
     }
     
     private void desbloquearComboBoxes() {
-        jComboBoxFOExt.setEnabled(true);
+        jTextFieldFOExt.setEnabled(true);
         jComboBoxFOInt.setEnabled(true);
         jComboBoxTXOpt.setEnabled(true);
         
@@ -518,6 +500,8 @@ public class Tramo extends javax.swing.JFrame {
         jComboBoxPzasAtenuadores.setEnabled(true);
         jComboBoxReceptores.setEnabled(true);
         jComboBoxPzasReceptores.setEnabled(true);
+        
+        jButtonOK.setEnabled(true);
     }
     
     public static void main(String args[]) {
@@ -565,7 +549,6 @@ public class Tramo extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> jComboBoxConectores;
     private javax.swing.JComboBox<String> jComboBoxDestino;
     private javax.swing.JComboBox<String> jComboBoxEmpalmes;
-    private javax.swing.JComboBox<String> jComboBoxFOExt;
     private javax.swing.JComboBox<String> jComboBoxFOInt;
     private javax.swing.JComboBox<String> jComboBoxOrigen;
     private javax.swing.JComboBox<String> jComboBoxPzasAmplificadores;
@@ -588,5 +571,6 @@ public class Tramo extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator3;
+    private javax.swing.JTextField jTextFieldFOExt;
     // End of variables declaration//GEN-END:variables
 }
