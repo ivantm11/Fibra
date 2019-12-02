@@ -4,7 +4,7 @@ use fibra;
 drop database fibra;
 drop table amplificadores;
 
-create table amplificadores(
+create table amplificadores( /*check*/
 	IdAmplificador  int (10),
 	nombre varchar(60) not null,
     PinMin int(20) not null,
@@ -25,7 +25,7 @@ insert into amplificadores values
 
 drop table atenuadores;
 
-create table atenuadores(
+create table atenuadores( /*chjeck*/
 	IdAtenuadores int(10),
 	nombre varchar(50) not null,
     precio float not null,
@@ -43,7 +43,7 @@ insert into atenuadores values
 
 drop table conectores;
 
-create table conectores(
+create table conectores( /*check*/
 	idConector int (10),
 	conector varchar(75) not null,
     precio int(11) not null,
@@ -65,7 +65,7 @@ insert into conectores values
 
 drop table empalmes;
 
-create table empalmes(
+create table empalmes( /*check*/
 	IdEmpalmes int (10),
 	nombre varchar(40) not null,
     precio float not null,
@@ -83,7 +83,7 @@ insert into empalmes values
 
 drop table producto;
 
-create table producto(
+create table producto( /*check*/
 	IdProducto int (10),
 	Fabricante varchar(100) not null,
     Tipo varchar(100) not null,
@@ -109,7 +109,7 @@ insert into producto values
 
 drop table rx;
 
-create table rx(
+create table rx(  /*check receptores*/
 	IdReceptor int (10),
 	Nombre varchar(50) not null,
     precio float not null,
@@ -129,7 +129,7 @@ insert into rx values
 
 drop table txoptic;
 
-create table txoptic(
+create table txoptic( /*TransmisorOptico*/
 	IdTxoptic int (10),
 	Nombre varchar(70) not null,
     WL int(25) not null,
@@ -159,14 +159,15 @@ select * from txoptic where WL=1310;
 select * from txoptic where WL=1550;
 
 
-select * from amplificadores order by costo;
-select * from atenuadores order by precio;
-select * from conectores order by precio;
-select * from empalmes order by precio;
+select * from amplificadores order by costo;/*-- ivan*/
+select * from atenuadores order by precio;/*----ivan */
+select * from conectores order by precio;/*  --ivan*/
+
+select * from empalmes order by precio; /* yo*/
 select precio * .05  as Precio_percent from empalmes;
 
 select * from producto order by costo;
-select * from rx order by precio;
+select * from rx order by precio 
 select * from txoptic order by costo;
 
 

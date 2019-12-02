@@ -1,9 +1,6 @@
 package Models;
 
-/**
- *
- * @author ivantrejo
- */
+
 public class FibraExterna {
     int id;
     String fabricante;
