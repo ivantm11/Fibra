@@ -2,18 +2,23 @@ package redestelecom;
 
 import Models.*;
 import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 
 
 public class Tramo extends javax.swing.JFrame {
-    private BaseDatos BD;
+    private final BaseDatos BD;
+    
+    private Amplificador amplificador;
+    private Atenuador atenuador;
+    private Conector conector;
+    private Empalme empalme;
+    private FibraExterna fibraExterna;
+    private FibraInterna fibraInterna;
+    private Receptor receptor;
+    private TransmisorOptico transmisorOptico;
     
     public Tramo(Connection conexionActiva) throws SQLException {
         initComponents();
@@ -22,6 +27,38 @@ public class Tramo extends javax.swing.JFrame {
         setResizable(false);
         setTitle(".:: Generar tramo ::.");
         bloquearComboBoxes();
+    }
+    
+    private void loadAmplificador() throws SQLException {
+        this.amplificador = this.BD.getAmplificador();
+    }
+    
+    private void loadAtenuador() throws SQLException {
+        this.atenuador = this.BD.getAtenuador();
+    }
+    
+    private void loadConector() throws SQLException {
+        this.conector = this.BD.getConector();
+    }
+    
+    private void loadEmpalme() throws SQLException {
+        this.empalme = this.BD.getEmpalme();
+    }
+    
+    private void loadFibraExterna(int WL) throws SQLException {
+        this.fibraExterna = this.BD.getFibraExterna(WL);
+    }
+    
+    private void loadFibraInterna(int WL) throws SQLException {
+        this.fibraInterna = this.BD.getFibraInterna(WL);
+    }
+    
+    private void loadReceptor(int WL) throws SQLException {
+        this.receptor = this.BD.getReceptor(WL);
+    }
+    
+    private void loadTransmisorOptico(int WL) throws SQLException {
+        this.transmisorOptico = this.BD.getTransmisorOptico(WL);
     }
     
     /**
@@ -275,23 +312,18 @@ public class Tramo extends javax.swing.JFrame {
             System.out.println(seleccion);
             desbloquearComboBoxes();
             int longOnda = Integer.parseInt(seleccion);
-            /*
             try {
-                loadAmplificadores();
+                loadAmplificador();
                 loadAtenuador();
-                loadConectores();
-                loadEmpalmes();
-                loadFO(longOnda, "exterior");
-                colocarFOExterna();
-                loadFO(longOnda, "interior");
-                colocarFOInterna();
-                loadRX(longOnda);
-                loadTX(longOnda);
-                
-                
+                loadConector();
+                loadEmpalme();
+                loadFibraExterna(longOnda);
+                loadFibraInterna(longOnda);
+                loadReceptor(longOnda);
+                loadTransmisorOptico(longOnda);
             } catch (SQLException ex) {
                 Logger.getLogger(Tramo.class.getName()).log(Level.SEVERE, null, ex);
-            }*/
+            }
         } else {
             System.out.println("Elige un valor válido");
             bloquearComboBoxes();
