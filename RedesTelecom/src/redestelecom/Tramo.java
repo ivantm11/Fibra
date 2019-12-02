@@ -59,6 +59,9 @@ public class Tramo extends javax.swing.JFrame {
     }
     
     private void processData() {
+      
+       
+        float Dtotal =0;
         float A = this.transmisorOptico.Potencia;
         float B = this.amplificador.PoutMax;
         float C = this.conector.PInsercion;
@@ -71,9 +74,54 @@ public class Tramo extends javax.swing.JFrame {
         float H = this.receptor.PinMin;
         float I = this.receptor.PinMax;
         float J = this.atenuador.atenuacion;
+        float x = (dExt*eExt);
+        float y = (((3/2)*dExt)*eExt);
+        float []Respuesta = new float[1000];
+        Respuesta[0]= A + B - C;
         
-        float R1 = A + B - C;
+        for (int i=1; i<= Dtotal; i++){
+           
+       Respuesta[i] = Respuesta[i-1] - C - x;
+        while (Dtotal<200000){  
+         if (Respuesta[i]>= F && Respuesta[i]<=G){
+             Respuesta[i+1]=Respuesta[i]-C+B;
+             Respuesta[i+2]=Respuesta[i+1]-C-x;
+              System.out.println(Respuesta[i]);
+              Dtotal+=dExt; 
+         }
+         else  {
+               Respuesta[i+1]=Respuesta[i]-C-y;
+               Respuesta[i+2]=Respuesta[i+1]-C+B;
+               System.out.println(Respuesta[i]);
+               Dtotal+=3/2*dExt; 
+         }
+          
+       System.out.println(Dtotal);
+        }
+        }  
     }
+    
+   /* private void SumaSI(){
+        float A = this.transmisorOptico.Potencia;
+        float B = this.amplificador.PoutMax;
+        float C = this.conector.PInsercion;
+           float dExt = this.fibraExterna.lc;
+           float eExt = this.fibraExterna.atenuacion;
+      float x = (dExt*eExt);
+        float R1 = A + B - C;
+        float R2 = R1 - C - x;
+    }*/
+    
+    /*private void SumaNo(){
+     float A = this.transmisorOptico.Potencia;
+        float B = this.amplificador.PoutMax;
+        float C = this.conector.PInsercion;
+           float dExt = this.fibraExterna.lc;
+           float eExt = this.fibraExterna.atenuacion;
+      float x = ((2/3*dExt)*eExt);
+        float R1 = A + B - C;
+        float R2 = R1 - C - x;
+    }*/
     
     private void putData() {
         this.putAmplificador();

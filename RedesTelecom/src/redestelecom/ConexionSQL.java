@@ -18,8 +18,8 @@ public class ConexionSQL {
     
     private static final String base = "fibra";
     private static final String user = "root";
-    private static final String password = "ivantm11";
-    //private static final String password = "1396";
+    //private static final String password = "ivantm11";
+    private static final String password = "1396";
     private static final String url = "jdbc:mysql://localhost:3306/" + base + "?useSSL=false&useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
     
     public ConexionSQL(){
