@@ -14,18 +14,7 @@ import java.util.logging.Logger;
 
 public class Tramo extends javax.swing.JFrame {
     private BaseDatos BD;
-    private String []DatosEquipo = new String[5];
-    private String []FibraExt = new String[20]; 
-    private String []RX = new String[10];
-    private String []TX = new String[15];
-    private String []Conec = new String[15];
-    private String []Amp = new String[20];
-    private String []Ate = new String[20];
-    private String []Em = new String[20];
-    private int cantFOExt;
-    private int cantFOInt;
-
- 
+    
     public Tramo(Connection conexionActiva) throws SQLException {
         initComponents();
         this.BD = new BaseDatos(conexionActiva);
