@@ -10,15 +10,18 @@ package Models;
  * @author royca
  */
 public class Empalme {
-    int IdEmpalmes;
-    String nombre;
-    float precio;
-    float perdidas; 
+    public int IdEmpalmes;
+    public String nombre;
+    public float precio;
+    public float perdidas; 
+    
+    public String mensaje;
 
-    public Empalme (int IdEmpalmes, String nombre, float precio, float perdidas){
+    public Empalme (int IdEmpalmes, String nombre, float precio, float perdidas, String mensaje){
         this.IdEmpalmes = IdEmpalmes;
         this.nombre = nombre;
         this.precio = precio;
         this.perdidas = perdidas;
+        this.mensaje = mensaje;
     }
 }

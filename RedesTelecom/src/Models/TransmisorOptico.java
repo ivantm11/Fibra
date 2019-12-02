@@ -10,18 +10,21 @@ package Models;
  * @author royca
  */
 public class TransmisorOptico {
-    int IdTxoptic;
-    String Nombre;
-    int WL;
-    int Potencia;
-    float costo;
+    public int IdTxoptic;
+    public String Nombre;
+    public int WL;
+    public int Potencia;
+    public float costo;
     
-    public TransmisorOptico(int IdTxoptic, String Nombre, int WL, int Potencia, float costo){
+    public String mensaje;
+    
+    public TransmisorOptico(int IdTxoptic, String Nombre, int WL, int Potencia, float costo, String mensaje){
         this.IdTxoptic = IdTxoptic;
         this.Nombre = Nombre;
         this.Potencia = Potencia;
         this.WL = WL;
         this.costo = costo;
+        this.mensaje = mensaje;
     }
     
 }

@@ -69,10 +69,10 @@ public class BaseDatos {
         
         respuesta.close();
         
-        Amplificador resultado = new Amplificador(id, nombre, PinMin, PinMax, PoutMin, PoutMax, Ganancia, costo);
+        String mensaje = nombre + " " + Ganancia;
+        System.out.println("Amplificador: " + mensaje);
         
-        String respuestaFO = nombre + " " + Ganancia;
-        System.out.println("Amplificador: " + respuestaFO);
+        Amplificador resultado = new Amplificador(id, nombre, PinMin, PinMax, PoutMin, PoutMax, Ganancia, costo, mensaje);
         
         return resultado;
     }
@@ -95,10 +95,10 @@ public class BaseDatos {
         
         respuesta.close();
         
-        Atenuador resultado = new Atenuador(id, nombre, precio, atenuacion);
+        String mensaje = nombre + " " + atenuacion;
+        System.out.println("Atenuador: " + mensaje);
         
-        String respuestaFO = nombre + " " + atenuacion;
-        System.out.println("Atenuador: " + respuestaFO);
+        Atenuador resultado = new Atenuador(id, nombre, precio, atenuacion, mensaje);
         
         return resultado;
     }
@@ -123,10 +123,10 @@ public class BaseDatos {
         
         respuesta.close();
         
-        Conector resultado = new Conector(id, conector, precio, descripcion, tipo, PInsercion);
+        String mensaje = conector + " " + tipo;
+        System.out.println("Conector: " + mensaje);
         
-        String respuestaFO = conector + " " + tipo;
-        System.out.println("Conector: " + respuestaFO);
+        Conector resultado = new Conector(id, conector, precio, descripcion, tipo, PInsercion, mensaje);
         
         return resultado;
     }
@@ -149,10 +149,10 @@ public class BaseDatos {
         
         respuesta.close();
         
-        Empalme resultado = new Empalme(IdEmpalmes, nombre, precio, perdidas);
+        String mensaje = nombre + " " + perdidas;
+        System.out.println("Conector: " + mensaje);
         
-        String respuestaFO = nombre + " " + perdidas;
-        System.out.println("Conector: " + respuestaFO);
+        Empalme resultado = new Empalme(IdEmpalmes, nombre, precio, perdidas, mensaje);
         
         return resultado;
     }
@@ -177,10 +177,10 @@ public class BaseDatos {
         float costo = respuesta.getFloat("costo");
         respuesta.close();
         
-        FibraExterna resultado = new FibraExterna(idP, fab, tipo, waveL, atenuacion, bandW, lc, costo);
+        String mensaje = fab + " " + tipo;
+        System.out.println("Fibra externa: " + mensaje);
         
-        String respuestaFO = fab + " " + tipo;
-        System.out.println("Fibra externa: " + respuestaFO);
+        FibraExterna resultado = new FibraExterna(idP, fab, tipo, waveL, atenuacion, bandW, lc, costo, mensaje);
         
         return resultado;
     }
@@ -205,10 +205,10 @@ public class BaseDatos {
         float costo = respuesta.getFloat("costo");
         respuesta.close();
         
-        FibraInterna resultado = new FibraInterna(idP, fab, tipo, waveL, atenuacion, bandW, lc, costo);
+        String mensaje = fab + " " + tipo;
+        System.out.println("Fibra interna: " + mensaje);
         
-        String respuestaFO = fab + " " + tipo;
-        System.out.println("Fibra interna: " + respuestaFO);
+        FibraInterna resultado = new FibraInterna(idP, fab, tipo, waveL, atenuacion, bandW, lc, costo, mensaje);
         
         return resultado;
     }
@@ -233,10 +233,10 @@ public class BaseDatos {
         
         respuesta.close();
         
-        Receptor resultado = new Receptor(IdReceptor, Nombre, precio, PinMin, PinMax, waveL);
+        String mensaje = Nombre + " " + waveL;
+        System.out.println("Receptor: " + mensaje);
         
-        String respuestaFO = Nombre + " " + waveL;
-        System.out.println("Receptor: " + respuestaFO);
+        Receptor resultado = new Receptor(IdReceptor, Nombre, precio, PinMin, PinMax, waveL, mensaje);
         
         return resultado;
     }
@@ -260,10 +260,10 @@ public class BaseDatos {
         
         respuesta.close();
         
-        TransmisorOptico resultado = new TransmisorOptico(IdTxoptic, Nombre, waveL, Potencia, costo);
+        String mensaje = Nombre + " " + waveL;
+        System.out.println("Transmisor optico: " + mensaje);
         
-        String respuestaFO = Nombre + " " + waveL;
-        System.out.println("Transmisor optico: " + respuestaFO);
+        TransmisorOptico resultado = new TransmisorOptico(IdTxoptic, Nombre, waveL, Potencia, costo, mensaje);
         
         return resultado;
     }

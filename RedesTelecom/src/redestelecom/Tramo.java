@@ -26,7 +26,29 @@ public class Tramo extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         setResizable(false);
         setTitle(".:: Generar tramo ::.");
-        bloquearComboBoxes();
+        bloquearCampos();
+    }
+    
+    private void loadData(int WL) throws SQLException {
+        this.loadAmplificador();
+        this.loadAtenuador();
+        this.loadConector();
+        this.loadEmpalme();
+        this.loadFibraExterna(WL);
+        this.loadFibraInterna(WL);
+        this.loadReceptor(WL);
+        this.loadTransmisorOptico(WL);
+    }
+    
+    private void putData() {
+        this.putAmplificador();
+        this.putAtenuador();
+        this.putConector();
+        this.putEmpalme();
+        this.putFOExterna();
+        this.putFOInterna();
+        this.putReceptor();
+        this.putTXOptico();
     }
     
     private void loadAmplificador() throws SQLException {
@@ -61,6 +83,38 @@ public class Tramo extends javax.swing.JFrame {
         this.transmisorOptico = this.BD.getTransmisorOptico(WL);
     }
     
+    private void putAmplificador() {
+        jTextFieldAmplificador.setText(this.amplificador.mensaje);
+    }
+    
+    private void putAtenuador() {
+        jTextFieldAtenuador.setText(this.atenuador.mensaje);
+    }
+    
+    private void putConector() {
+        jTextFieldConector.setText(this.conector.mensaje);
+    }
+    
+    private void putEmpalme() {
+        jTextFieldEmpalme.setText(this.empalme.mensaje);
+    }
+    
+    private void putFOExterna() {
+        jTextFieldFOExterna.setText(this.fibraExterna.mensaje);
+    }
+    
+    private void putFOInterna() {
+        jTextFieldFOInterna.setText(this.fibraInterna.mensaje);
+    }
+    
+    private void putReceptor() {
+        jTextFieldReceptor.setText(this.receptor.mensaje);
+    }
+    
+    private void putTXOptico() {
+        jTextFieldTxOptico.setText(this.transmisorOptico.mensaje);
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -75,19 +129,7 @@ public class Tramo extends javax.swing.JFrame {
         jComboBoxDestino = new javax.swing.JComboBox<>();
         jSeparator1 = new javax.swing.JSeparator();
         jComboBoxWL = new javax.swing.JComboBox<>();
-        jComboBoxFOInt = new javax.swing.JComboBox<>();
-        jComboBoxTXOpt = new javax.swing.JComboBox<>();
         jSeparator3 = new javax.swing.JSeparator();
-        jComboBoxConectores = new javax.swing.JComboBox<>();
-        jComboBoxEmpalmes = new javax.swing.JComboBox<>();
-        jComboBoxAmplificadores = new javax.swing.JComboBox<>();
-        jComboBoxAtenuadores = new javax.swing.JComboBox<>();
-        jComboBoxReceptores = new javax.swing.JComboBox<>();
-        jComboBoxPzasConectores = new javax.swing.JComboBox<>();
-        jComboBoxPzasEmpalmes = new javax.swing.JComboBox<>();
-        jComboBoxPzasReceptores = new javax.swing.JComboBox<>();
-        jComboBoxPzasAmplificadores = new javax.swing.JComboBox<>();
-        jComboBoxPzasAtenuadores = new javax.swing.JComboBox<>();
         jButtonOK = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -98,16 +140,32 @@ public class Tramo extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
-        jTextFieldFOExt = new javax.swing.JTextField();
+        jTextFieldFOExterna = new javax.swing.JTextField();
+        jTextFieldFOInterna = new javax.swing.JTextField();
+        jTextFieldTxOptico = new javax.swing.JTextField();
+        jTextFieldConector = new javax.swing.JTextField();
+        jTextFieldEmpalme = new javax.swing.JTextField();
+        jTextFieldReceptor = new javax.swing.JTextField();
+        jTextFieldAmplificador = new javax.swing.JTextField();
+        jTextFieldAtenuador = new javax.swing.JTextField();
+        jTextFieldConectorPzas = new javax.swing.JTextField();
+        jTextFieldEmpalmePzas = new javax.swing.JTextField();
+        jTextFieldReceptorPzas = new javax.swing.JTextField();
+        jTextFieldAmplificadorPzas = new javax.swing.JTextField();
+        jTextFieldAtenuadorPzas = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("Lucida Grande", 0, 24)); // NOI18N
         jLabel1.setText("Generar tramo");
 
-        jComboBoxOrigen.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Origen", "La Paz, Baja California Sur" }));
+        jComboBoxOrigen.setEditable(true);
+        jComboBoxOrigen.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "La Paz, Baja California Sur" }));
+        jComboBoxOrigen.setEnabled(false);
 
-        jComboBoxDestino.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Destino", "Cd. Constitución, Baja California Sur" }));
+        jComboBoxDestino.setEditable(true);
+        jComboBoxDestino.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Cd. Constitución, Baja California Sur" }));
+        jComboBoxDestino.setEnabled(false);
 
         jComboBoxWL.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Longitud de onda", "1310", "1550" }));
         jComboBoxWL.addActionListener(new java.awt.event.ActionListener() {
@@ -115,50 +173,6 @@ public class Tramo extends javax.swing.JFrame {
                 jComboBoxWLActionPerformed(evt);
             }
         });
-
-        jComboBoxFOInt.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Fibra óptica interna" }));
-        jComboBoxFOInt.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBoxFOIntActionPerformed(evt);
-            }
-        });
-
-        jComboBoxTXOpt.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Transmisor óptico" }));
-
-        jComboBoxConectores.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Conectores" }));
-        jComboBoxConectores.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBoxConectoresActionPerformed(evt);
-            }
-        });
-
-        jComboBoxEmpalmes.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Empalmes" }));
-
-        jComboBoxAmplificadores.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Amplificadores" }));
-
-        jComboBoxAtenuadores.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Atenuadores" }));
-
-        jComboBoxReceptores.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Receptores" }));
-        jComboBoxReceptores.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBoxReceptoresActionPerformed(evt);
-            }
-        });
-
-        jComboBoxPzasConectores.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Piezas", "1", "2", "3", "4", "5" }));
-        jComboBoxPzasConectores.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBoxPzasConectoresActionPerformed(evt);
-            }
-        });
-
-        jComboBoxPzasEmpalmes.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Piezas", "1", "2", "3", "4", "5" }));
-
-        jComboBoxPzasReceptores.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Piezas", "1", "2", "3", "4", "5" }));
-
-        jComboBoxPzasAmplificadores.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Piezas", "1", "2", "3", "4", "5" }));
-
-        jComboBoxPzasAtenuadores.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Piezas", "1", "2", "3", "4", "5" }));
 
         jButtonOK.setText("Cotizar");
 
@@ -170,15 +184,41 @@ public class Tramo extends javax.swing.JFrame {
 
         jLabel5.setText("Transmisor óptico");
 
-        jLabel6.setText("Conectores");
+        jLabel6.setText("Conector");
 
-        jLabel7.setText("Empalmes");
+        jLabel7.setText("Empalme");
 
-        jLabel8.setText("Amplificadores");
+        jLabel8.setText("Amplificador");
 
-        jLabel9.setText("Atenuadores");
+        jLabel9.setText("Atenuador");
 
-        jLabel10.setText("Receptores");
+        jLabel10.setText("Receptor");
+
+        jTextFieldFOExterna.setText("Fibra óptica externa");
+
+        jTextFieldFOInterna.setText("Fibra óptica interna");
+
+        jTextFieldTxOptico.setText("Transmisor óptico");
+
+        jTextFieldConector.setText("Conector");
+
+        jTextFieldEmpalme.setText("Empalme");
+
+        jTextFieldReceptor.setText("Receptor");
+
+        jTextFieldAmplificador.setText("Amplificador");
+
+        jTextFieldAtenuador.setText("Atenuador");
+
+        jTextFieldConectorPzas.setText("Piezas");
+
+        jTextFieldEmpalmePzas.setText("Piezas");
+
+        jTextFieldReceptorPzas.setText("Piezas");
+
+        jTextFieldAmplificadorPzas.setText("Piezas");
+
+        jTextFieldAtenuadorPzas.setText("Piezas");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -188,58 +228,62 @@ public class Tramo extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jComboBoxEmpalmes, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jComboBoxPzasEmpalmes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jSeparator1)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 544, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jTextFieldConector, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel10)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(jTextFieldEmpalme, javax.swing.GroupLayout.DEFAULT_SIZE, 155, Short.MAX_VALUE)
+                                            .addComponent(jTextFieldReceptor))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jTextFieldReceptorPzas, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jLabel8)
+                                    .addComponent(jLabel9)
+                                    .addComponent(jButtonOK, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(jTextFieldAmplificador, javax.swing.GroupLayout.DEFAULT_SIZE, 155, Short.MAX_VALUE)
+                                            .addComponent(jTextFieldAtenuador))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(jTextFieldAmplificadorPzas)
+                                            .addComponent(jTextFieldAtenuadorPzas, javax.swing.GroupLayout.DEFAULT_SIZE, 95, Short.MAX_VALUE)))))
+                            .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jComboBoxOrigen, javax.swing.GroupLayout.Alignment.LEADING, 0, 260, Short.MAX_VALUE)
-                                    .addComponent(jComboBoxDestino, javax.swing.GroupLayout.Alignment.LEADING, 0, 1, Short.MAX_VALUE)
-                                    .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.LEADING))
-                                .addComponent(jTextFieldFOExt, javax.swing.GroupLayout.PREFERRED_SIZE, 266, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGap(18, 18, 18)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(jLabel4)
-                                .addComponent(jLabel2)
-                                .addComponent(jComboBoxFOInt, 0, 260, Short.MAX_VALUE)
-                                .addComponent(jComboBoxWL, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                            .addComponent(jLabel5)
-                            .addGap(18, 18, 18)
-                            .addComponent(jComboBoxTXOpt, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.LEADING))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 544, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(layout.createSequentialGroup()
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jComboBoxConectores, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(jComboBoxPzasConectores, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addComponent(jLabel10)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jComboBoxReceptores, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(jComboBoxPzasReceptores, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(jLabel8)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jComboBoxAmplificadores, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(jComboBoxPzasAmplificadores, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addComponent(jLabel9)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jComboBoxAtenuadores, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(jComboBoxPzasAtenuadores, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addComponent(jButtonOK, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addComponent(jTextFieldTxOptico)
+                                    .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jComboBoxWL, 0, 260, Short.MAX_VALUE)
+                                    .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING))
+                                .addGap(24, 24, 24)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel3)
+                                    .addComponent(jLabel4)
+                                    .addComponent(jTextFieldFOExterna)
+                                    .addComponent(jTextFieldFOInterna, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jComboBoxOrigen, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jComboBoxDestino, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addContainerGap())
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel6)
+                            .addComponent(jLabel7)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(161, 161, 161)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jTextFieldEmpalmePzas, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jTextFieldConectorPzas, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -249,26 +293,26 @@ public class Tramo extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jComboBoxOrigen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jComboBoxDestino, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBoxWL, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jComboBoxDestino, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(jLabel4))
+                    .addComponent(jLabel2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jComboBoxFOInt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextFieldFOExt, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTextFieldFOExterna, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jComboBoxWL, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
-                    .addComponent(jComboBoxTXOpt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel4))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTextFieldTxOptico, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextFieldFOInterna, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(3, 3, 3)
                 .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -276,20 +320,20 @@ public class Tramo extends javax.swing.JFrame {
                     .addComponent(jLabel8))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jComboBoxConectores, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBoxPzasConectores, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBoxAmplificadores, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBoxPzasAmplificadores, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(4, 4, 4)
+                    .addComponent(jTextFieldConector, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextFieldAmplificador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextFieldConectorPzas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextFieldAmplificadorPzas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(6, 6, 6)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
                     .addComponent(jLabel9))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jComboBoxEmpalmes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBoxPzasEmpalmes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBoxAtenuadores, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBoxPzasAtenuadores, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextFieldEmpalme, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextFieldAtenuador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextFieldEmpalmePzas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextFieldAtenuadorPzas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButtonOK, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -297,9 +341,9 @@ public class Tramo extends javax.swing.JFrame {
                         .addComponent(jLabel10)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jComboBoxReceptores, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jComboBoxPzasReceptores, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(jTextFieldReceptor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextFieldReceptorPzas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(18, Short.MAX_VALUE))
         );
 
         pack();
@@ -310,76 +354,79 @@ public class Tramo extends javax.swing.JFrame {
         String seleccion = jComboBoxWL.getSelectedItem().toString();
         if (seleccion != "Longitud de onda") {
             System.out.println(seleccion);
-            desbloquearComboBoxes();
+            desbloquearCampos();
             int longOnda = Integer.parseInt(seleccion);
             try {
-                loadAmplificador();
-                loadAtenuador();
-                loadConector();
-                loadEmpalme();
-                loadFibraExterna(longOnda);
-                loadFibraInterna(longOnda);
-                loadReceptor(longOnda);
-                loadTransmisorOptico(longOnda);
+                this.loadData(longOnda);
+                this.putData();
             } catch (SQLException ex) {
                 Logger.getLogger(Tramo.class.getName()).log(Level.SEVERE, null, ex);
             }
         } else {
             System.out.println("Elige un valor válido");
-            bloquearComboBoxes();
+            bloquearCampos();
         }
     }//GEN-LAST:event_jComboBoxWLActionPerformed
-
-    private void jComboBoxPzasConectoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxPzasConectoresActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBoxPzasConectoresActionPerformed
-
-    private void jComboBoxConectoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxConectoresActionPerformed
-        
-    }//GEN-LAST:event_jComboBoxConectoresActionPerformed
-
-    private void jComboBoxReceptoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxReceptoresActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBoxReceptoresActionPerformed
-
-    private void jComboBoxFOIntActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxFOIntActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBoxFOIntActionPerformed
     
-    private void bloquearComboBoxes() {
-        jTextFieldFOExt.setEnabled(false);
-        jComboBoxFOInt.setEnabled(false);
-        jComboBoxTXOpt.setEnabled(false);
+    private void bloquearCampos() {
+        jTextFieldAmplificador.setEditable(false);
+        jTextFieldAmplificador.setEnabled(false);
+        jTextFieldAmplificadorPzas.setEditable(false);
+        jTextFieldAmplificadorPzas.setEnabled(false);
         
-        jComboBoxConectores.setEnabled(false);
-        jComboBoxPzasConectores.setEnabled(false);
-        jComboBoxEmpalmes.setEnabled(false);
-        jComboBoxPzasEmpalmes.setEnabled(false);
-        jComboBoxAmplificadores.setEnabled(false);
-        jComboBoxPzasAmplificadores.setEnabled(false);
-        jComboBoxAtenuadores.setEnabled(false);
-        jComboBoxPzasAtenuadores.setEnabled(false);
-        jComboBoxReceptores.setEnabled(false);
-        jComboBoxPzasReceptores.setEnabled(false);
+        jTextFieldAtenuador.setEditable(false);
+        jTextFieldAtenuador.setEnabled(false);
+        jTextFieldAtenuadorPzas.setEditable(false);
+        jTextFieldAtenuadorPzas.setEnabled(false);
+        
+        jTextFieldConector.setEditable(false);
+        jTextFieldConector.setEnabled(false);
+        jTextFieldConectorPzas.setEditable(false);
+        jTextFieldConectorPzas.setEnabled(false);
+        
+        jTextFieldEmpalme.setEditable(false);
+        jTextFieldEmpalme.setEnabled(false);
+        jTextFieldEmpalmePzas.setEditable(false);
+        jTextFieldEmpalmePzas.setEnabled(false);
+        
+        jTextFieldFOExterna.setEditable(false);
+        jTextFieldFOExterna.setEnabled(false);
+        
+        jTextFieldFOInterna.setEditable(false);
+        jTextFieldFOInterna.setEnabled(false);
+        
+        jTextFieldReceptor.setEditable(false);
+        jTextFieldReceptor.setEnabled(false);
+        jTextFieldReceptorPzas.setEditable(false);
+        jTextFieldReceptorPzas.setEnabled(false);
+        
+        jTextFieldTxOptico.setEditable(false);
+        jTextFieldTxOptico.setEnabled(false);
         
         jButtonOK.setEnabled(false);
     }
     
-    private void desbloquearComboBoxes() {
-        jTextFieldFOExt.setEnabled(true);
-        jComboBoxFOInt.setEnabled(true);
-        jComboBoxTXOpt.setEnabled(true);
+    private void desbloquearCampos() {
+        jTextFieldAmplificador.setEnabled(true);
+        jTextFieldAmplificadorPzas.setEnabled(true);
         
-        jComboBoxConectores.setEnabled(true);
-        jComboBoxPzasConectores.setEnabled(true);
-        jComboBoxEmpalmes.setEnabled(true);
-        jComboBoxPzasEmpalmes.setEnabled(true);
-        jComboBoxAmplificadores.setEnabled(true);
-        jComboBoxPzasAmplificadores.setEnabled(true);
-        jComboBoxAtenuadores.setEnabled(true);
-        jComboBoxPzasAtenuadores.setEnabled(true);
-        jComboBoxReceptores.setEnabled(true);
-        jComboBoxPzasReceptores.setEnabled(true);
+        jTextFieldAtenuador.setEnabled(true);
+        jTextFieldAtenuadorPzas.setEnabled(true);
+        
+        jTextFieldConector.setEnabled(true);
+        jTextFieldConectorPzas.setEnabled(true);
+        
+        jTextFieldEmpalme.setEnabled(true);
+        jTextFieldEmpalmePzas.setEnabled(true);
+        
+        jTextFieldFOExterna.setEnabled(true);
+        
+        jTextFieldFOInterna.setEnabled(true);
+        
+        jTextFieldReceptor.setEnabled(true);
+        jTextFieldReceptorPzas.setEnabled(true);
+        
+        jTextFieldTxOptico.setEnabled(true);
         
         jButtonOK.setEnabled(true);
     }
@@ -424,20 +471,8 @@ public class Tramo extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonOK;
-    private javax.swing.JComboBox<String> jComboBoxAmplificadores;
-    private javax.swing.JComboBox<String> jComboBoxAtenuadores;
-    private javax.swing.JComboBox<String> jComboBoxConectores;
     private javax.swing.JComboBox<String> jComboBoxDestino;
-    private javax.swing.JComboBox<String> jComboBoxEmpalmes;
-    private javax.swing.JComboBox<String> jComboBoxFOInt;
     private javax.swing.JComboBox<String> jComboBoxOrigen;
-    private javax.swing.JComboBox<String> jComboBoxPzasAmplificadores;
-    private javax.swing.JComboBox<String> jComboBoxPzasAtenuadores;
-    private javax.swing.JComboBox<String> jComboBoxPzasConectores;
-    private javax.swing.JComboBox<String> jComboBoxPzasEmpalmes;
-    private javax.swing.JComboBox<String> jComboBoxPzasReceptores;
-    private javax.swing.JComboBox<String> jComboBoxReceptores;
-    private javax.swing.JComboBox<String> jComboBoxTXOpt;
     private javax.swing.JComboBox<String> jComboBoxWL;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -451,6 +486,18 @@ public class Tramo extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator3;
-    private javax.swing.JTextField jTextFieldFOExt;
+    private javax.swing.JTextField jTextFieldAmplificador;
+    private javax.swing.JTextField jTextFieldAmplificadorPzas;
+    private javax.swing.JTextField jTextFieldAtenuador;
+    private javax.swing.JTextField jTextFieldAtenuadorPzas;
+    private javax.swing.JTextField jTextFieldConector;
+    private javax.swing.JTextField jTextFieldConectorPzas;
+    private javax.swing.JTextField jTextFieldEmpalme;
+    private javax.swing.JTextField jTextFieldEmpalmePzas;
+    private javax.swing.JTextField jTextFieldFOExterna;
+    private javax.swing.JTextField jTextFieldFOInterna;
+    private javax.swing.JTextField jTextFieldReceptor;
+    private javax.swing.JTextField jTextFieldReceptorPzas;
+    private javax.swing.JTextField jTextFieldTxOptico;
     // End of variables declaration//GEN-END:variables
 }
