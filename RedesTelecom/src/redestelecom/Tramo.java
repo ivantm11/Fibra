@@ -26,7 +26,25 @@ public class Tramo extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         setResizable(false);
         setTitle(".:: Generar tramo ::.");
-        bloquearCampos();
+        this.bloquearCampos();
+    }
+    
+    private void startProcess(String seleccion) {
+        if (seleccion != "Longitud de onda") {
+            System.out.println(seleccion);
+            this.desbloquearCampos();
+            int longOnda = Integer.parseInt(seleccion);
+            try {
+                this.loadData(longOnda);
+                this.processData();
+                this.putData();
+            } catch (SQLException ex) {
+                Logger.getLogger(Tramo.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } else {
+            System.out.println("Elige un valor válido");
+            this.bloquearCampos();
+        }
     }
     
     private void loadData(int WL) throws SQLException {
@@ -38,6 +56,23 @@ public class Tramo extends javax.swing.JFrame {
         this.loadFibraInterna(WL);
         this.loadReceptor(WL);
         this.loadTransmisorOptico(WL);
+    }
+    
+    private void processData() {
+        float A = this.transmisorOptico.Potencia;
+        float B = this.amplificador.PoutMax;
+        float C = this.conector.PInsercion;
+        float dExt = this.fibraExterna.lc;
+        float dInt = this.fibraInterna.lc;
+        float eExt = this.fibraExterna.atenuacion;
+        float eInt = this.fibraInterna.atenuacion;
+        float F = this.amplificador.PinMin;
+        float G = this.amplificador.PinMax;
+        float H = this.receptor.PinMin;
+        float I = this.receptor.PinMax;
+        float J = this.atenuador.atenuacion;
+        
+        float R1 = A + B - C;
     }
     
     private void putData() {
@@ -351,21 +386,7 @@ public class Tramo extends javax.swing.JFrame {
 
     private void jComboBoxWLActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxWLActionPerformed
         // TODO add your handling code here:
-        String seleccion = jComboBoxWL.getSelectedItem().toString();
-        if (seleccion != "Longitud de onda") {
-            System.out.println(seleccion);
-            desbloquearCampos();
-            int longOnda = Integer.parseInt(seleccion);
-            try {
-                this.loadData(longOnda);
-                this.putData();
-            } catch (SQLException ex) {
-                Logger.getLogger(Tramo.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        } else {
-            System.out.println("Elige un valor válido");
-            bloquearCampos();
-        }
+        this.startProcess(jComboBoxWL.getSelectedItem().toString());
     }//GEN-LAST:event_jComboBoxWLActionPerformed
     
     private void bloquearCampos() {
